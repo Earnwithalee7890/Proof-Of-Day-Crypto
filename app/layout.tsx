@@ -5,11 +5,13 @@ import { Providers } from '@/components/Providers';
 export const metadata: Metadata = {
     title: 'Proof Of Day',
     description: 'Show up every day on Base. Build your streak, earn rewards, prove your commitment onchain.',
+    viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
     other: {
         'base:app_id': '694c5189c63ad876c9081210',
         'fc:frame': JSON.stringify({
             version: "next",
             imageUrl: "https://proof-of-day.vercel.app/og-image.png",
+            homeUrl: "https://proof-of-day.vercel.app",
             button: {
                 title: "Check In",
                 action: {
@@ -32,6 +34,7 @@ export const metadata: Metadata = {
                 url: 'https://proof-of-day.vercel.app/og-image.png',
                 width: 1200,
                 height: 630,
+                alt: 'Proof Of Day'
             },
         ],
         locale: 'en_US',
@@ -48,6 +51,8 @@ export default function RootLayout({
         <html lang="en">
             <head>
                 <link rel="icon" href="https://proof-of-day.vercel.app/icon.png" />
+                <link rel="apple-touch-icon" href="https://proof-of-day.vercel.app/icon.png" />
+                <link rel="manifest" href="https://proof-of-day.vercel.app/.well-known/farcaster.json" />
             </head>
             <body>
                 <Providers>{children}</Providers>
