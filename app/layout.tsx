@@ -21,6 +21,9 @@ export default function RootLayout({
                 <title>Proof Of Day</title>
                 <meta name="description" content="Show up every day on Base. Build your streak, earn rewards, prove your commitment onchain." />
 
+                {/* Base App ID */}
+                <meta name="base:app_id" content="694c5189c63ad876c9081210" />
+
                 {/* Base App Meta Tags */}
                 <meta property="og:title" content="Proof Of Day" />
                 <meta property="og:description" content="Show up every day on Base. Build your streak, earn rewards, prove your commitment onchain." />
