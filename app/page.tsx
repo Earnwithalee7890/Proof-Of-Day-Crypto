@@ -1,7 +1,9 @@
 'use client';
 
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-import { useAccount } from 'wagmi';
+import { useAccount, useConnect } from 'wagmi';
+import { useEffect } from 'react';
+import sdk from '@farcaster/frame-sdk';
 import CheckInButton from '@/components/CheckInButton';
 import StatsCard from '@/components/StatsCard';
 import ClaimButton from '@/components/ClaimButton';
@@ -13,6 +15,23 @@ import { DAILY_CHECKIN_ADDRESS } from '@/contracts/DailyCheckIn';
 
 export default function Home() {
     const { isConnected } = useAccount();
+    const { connect, connectors } = useConnect();
+
+    useEffect(() => {
+        const init = async () => {
+            sdk.actions.ready();
+        };
+        init();
+    }, []);
+
+    useEffect(() => {
+        if (!isConnected) {
+            const farcasterConnector = connectors.find((c) => c.id === 'farcaster-frame');
+            if (farcasterConnector) {
+                connect({ connector: farcasterConnector });
+            }
+        }
+    }, [isConnected, connectors, connect]);
 
     return (
         <main className="min-h-screen relative">

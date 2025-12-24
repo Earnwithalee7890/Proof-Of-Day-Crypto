@@ -1,0 +1,17 @@
+{
+    "accountAssociation": {
+        "header": "eyJmaWQiOiA4ODg4LCAidHlwZSI6ICJjdXN0b2RpYWwiLCAia2V5IjogIjAweDFlMjMzNDU2Nzg5MGFiY2RlZmdaIn0",
+        "payload": "eyJkb21haW4iOiAicHJvb2Ytb2YtZGF5LnZlcmNlbC5hcHAifQ",
+        "signature": "MHhjMTIzNDU2Nzg5MGFiY2RlZmcyMzQ1Njc4OTBhYmNkZWYwMTIzNDU2Nzg5MGFiY2RlZjAxMjM0NTY3ODkwYmNkZWY"
+    },
+    "frame": {
+        "version": "1",
+        "name": "Proof Of Day",
+        "iconUrl": "https://proof-of-day.vercel.app/icon.png",
+        "splashImageUrl": "https://proof-of-day.vercel.app/splash.png",
+        "splashBackgroundColor": "#0052FF",
+        "imageUrl": "https://proof-of-day.vercel.app/og-image.png",
+        "buttonTitle": "Check In",
+        "webhookUrl": "https://proof-of-day.vercel.app/api/webhook"
+    }
+}
