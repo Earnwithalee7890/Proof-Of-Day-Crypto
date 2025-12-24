@@ -46,7 +46,7 @@ export default function Home() {
                             <div className="relative">
                                 <div className="absolute -inset-2 bg-base-blue rounded-full blur-xl opacity-20 group-hover:opacity-40 transition-opacity duration-500" />
                                 <img
-                                    src="/icon.png"
+                                    src="https://proof-of-day.vercel.app/icon.png"
                                     alt="Logo"
                                     className="w-12 h-12 rounded-xl border border-white/20 shadow-2xl relative z-10 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3"
                                 />
