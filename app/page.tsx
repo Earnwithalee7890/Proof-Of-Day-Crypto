@@ -39,28 +39,38 @@ export default function Home() {
             <AnimatedBackground />
 
             {/* Header */}
-            <header className="glass sticky top-0 z-50 border-b border-white/10">
+            <header className="glass sticky top-0 z-50 border-b border-white/10 backdrop-blur-xl">
                 <div className="container mx-auto px-4 py-4">
-                    <div className="flex items-center justify-between mb-3">
-                        <div className="flex items-center gap-3">
-                            <div className="text-4xl">🔵</div>
-                            <div>
-                                <h1 className="text-2xl font-black text-gradient">Proof Of Day</h1>
-                                <p className="text-xs text-gray-400">Show up. Build streaks. Earn onchain.</p>
+                    <div className="flex items-center justify-between gap-4">
+                        <div className="flex items-center gap-4 group cursor-default">
+                            <div className="relative">
+                                <div className="absolute -inset-2 bg-base-blue rounded-full blur-xl opacity-20 group-hover:opacity-40 transition-opacity duration-500" />
+                                <img
+                                    src="/icon.png"
+                                    alt="Logo"
+                                    className="w-12 h-12 rounded-xl border border-white/20 shadow-2xl relative z-10 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3"
+                                />
+                            </div>
+                            <div className="hidden sm:block">
+                                <h1 className="text-2xl font-black text-gradient tracking-tighter uppercase">Proof Of Day</h1>
+                                <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Onchain Daily Ledger</p>
                             </div>
                         </div>
 
-                        <ConnectButton />
+                        <div className="flex items-center gap-3">
+                            <ConnectButton showBalance={false} chainStatus="icon" accountStatus="avatar" />
+                        </div>
                     </div>
 
                     {/* User Profile - Shows when connected */}
                     {isConnected && (
-                        <div className="animate-in">
+                        <div className="mt-4 animate-in">
                             <UserProfile />
                         </div>
                     )}
                 </div>
             </header>
+
 
             {/* Hero Section */}
             <section className="container mx-auto px-4 py-12 md:py-20">

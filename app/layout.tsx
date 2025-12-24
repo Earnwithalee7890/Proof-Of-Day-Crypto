@@ -24,12 +24,16 @@ export default function RootLayout({
                 {/* Base App ID */}
                 <meta name="base:app_id" content="694c5189c63ad876c9081210" />
 
-                {/* Base App Meta Tags */}
+                {/* Open Graph / Social */}
                 <meta property="og:title" content="Proof Of Day" />
                 <meta property="og:description" content="Show up every day on Base. Build your streak, earn rewards, prove your commitment onchain." />
-                <meta property="og:image" content="/og-image.png" />
-                <meta name="fc:frame" content="vNext" />
-                <meta name="fc:frame:image" content="/og-image.png" />
+                <meta property="og:image" content="https://proof-of-day.vercel.app/og-image.png" />
+                <meta property="og:url" content="https://proof-of-day.vercel.app" />
+                <meta property="og:type" content="website" />
+
+                {/* Farcaster Mini App (Frame v2) */}
+                <meta name="fc:frame" content='{"version": "next", "imageUrl": "https://proof-of-day.vercel.app/og-image.png", "button": {"title": "Check In", "action": {"type": "launch_app", "name": "Proof Of Day", "url": "https://proof-of-day.vercel.app", "splashImageUrl": "https://proof-of-day.vercel.app/splash.png", "splashBackgroundColor": "#0052FF"}}}' />
+
 
                 {/* Favicon */}
                 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔵</text></svg>" />
