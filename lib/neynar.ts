@@ -12,11 +12,10 @@ export async function getFarcasterUserByAddress(address: string) {
     }
 
     try {
-        const response = await neynarClient.fetchBulkUsersByEthereumAddress([address]);
-        if (response && response[address] && response[address].length > 0) {
-            return response[address][0];
-        }
-        return null;
+        const response = await neynarClient.fetchBulkUsersByEthOrSolAddress({ addresses: [address] });
+        return response && response[address] && response[address].length > 0
+            ? response[address][0]
+            : null;
     } catch (error) {
         console.error('Error fetching Farcaster user:', error);
         return null;
