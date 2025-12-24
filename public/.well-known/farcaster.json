@@ -1,17 +1,18 @@
 {
     "accountAssociation": {
-        "header": "eyJmaWQiOjMzODA2MCwidHlwZSI6ImN1c3RvZHkiLCJrZXkiOiIweEFlOGQ5Y2I3OTg1MkZCMWUxYzQ3MTJjM0Q0RjBBNTlENTM4ODQyYTEifQ",
+        "header": "eyJmaWQiOjMzODA2MCwidHlwZSI6ImF1dGgiLCJrZXkiOiIweEJDNzRlQTExNWY0ZjMwQ2U3MzdGMzk0YTkzNzAxQWJkMTY0MmQ3RDEifQ",
         "payload": "eyJkb21haW4iOiJwcm9vZi1vZi1kYXkudmVyY2VsLmFwcCJ9",
-        "signature": "0v8QtImeUg6AqetquJ4S4+61ztAVrhOD6ZA6yCCbvuBehL2341seGGe8oqCMdnhahEqCPCfSmLaz/s0Jbbn5CRs="
+        "signature": "lXiJXgWUzimMKu+M2YSnTu8ax1CRWRU1zoIS33Jnjp0APFIxcmwcT2PkiXvPjbGnS95gJ56WZ8uoqYqdG+kPNBw="
     },
     "frame": {
         "version": "1",
         "name": "Proof Of Day",
         "iconUrl": "https://proof-of-day.vercel.app/icon.png",
-        "splashImageUrl": "https://proof-of-day.vercel.app/splash.png",
-        "splashBackgroundColor": "#0052FF",
+        "homeUrl": "https://proof-of-day.vercel.app",
         "imageUrl": "https://proof-of-day.vercel.app/og-image.png",
         "buttonTitle": "Check In",
+        "splashImageUrl": "https://proof-of-day.vercel.app/splash.png",
+        "splashBackgroundColor": "#0052FF",
         "webhookUrl": "https://proof-of-day.vercel.app/api/webhook"
     }
 }
