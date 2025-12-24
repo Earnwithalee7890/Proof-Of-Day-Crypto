@@ -1,57 +1,56 @@
-'use client';
-
-import '@rainbow-me/rainbowkit/styles.css';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { WagmiProvider } from 'wagmi';
-import { RainbowKitProvider, darkTheme } from '@rainbow-me/rainbowkit';
-import { config } from '@/lib/wagmi';
+import type { Metadata } from 'next';
 import './globals.css';
-import { useState } from 'react';
+import { Providers } from '@/components/Providers';
+
+export const metadata: Metadata = {
+    title: 'Proof Of Day',
+    description: 'Show up every day on Base. Build your streak, earn rewards, prove your commitment onchain.',
+    other: {
+        'base:app_id': '694c5189c63ad876c9081210',
+        'fc:frame': JSON.stringify({
+            version: "next",
+            imageUrl: "https://proof-of-day.vercel.app/og-image.png",
+            button: {
+                title: "Check In",
+                action: {
+                    type: "launch_app",
+                    name: "Proof Of Day",
+                    url: "https://proof-of-day.vercel.app",
+                    splashImageUrl: "https://proof-of-day.vercel.app/splash.png",
+                    splashBackgroundColor: "#0052FF",
+                },
+            },
+        }),
+    },
+    openGraph: {
+        title: 'Proof Of Day',
+        description: 'Show up every day on Base. Build your streak, earn rewards, prove your commitment onchain.',
+        url: 'https://proof-of-day.vercel.app',
+        siteName: 'Proof Of Day',
+        images: [
+            {
+                url: 'https://proof-of-day.vercel.app/og-image.png',
+                width: 1200,
+                height: 630,
+            },
+        ],
+        locale: 'en_US',
+        type: 'website',
+    },
+};
 
 export default function RootLayout({
     children,
 }: {
     children: React.ReactNode;
 }) {
-    const [queryClient] = useState(() => new QueryClient());
-
     return (
         <html lang="en">
             <head>
-                <title>Proof Of Day</title>
-                <meta name="description" content="Show up every day on Base. Build your streak, earn rewards, prove your commitment onchain." />
-
-                {/* Base App ID */}
-                <meta name="base:app_id" content="694c5189c63ad876c9081210" />
-
-                {/* Open Graph / Social */}
-                <meta property="og:title" content="Proof Of Day" />
-                <meta property="og:description" content="Show up every day on Base. Build your streak, earn rewards, prove your commitment onchain." />
-                <meta property="og:image" content="https://proof-of-day.vercel.app/og-image.png" />
-                <meta property="og:url" content="https://proof-of-day.vercel.app" />
-                <meta property="og:type" content="website" />
-
-                {/* Farcaster Mini App (Frame v2) */}
-                <meta name="fc:frame" content='{"version": "next", "imageUrl": "https://proof-of-day.vercel.app/og-image.png", "button": {"title": "Check In", "action": {"type": "launch_app", "name": "Proof Of Day", "url": "https://proof-of-day.vercel.app", "splashImageUrl": "https://proof-of-day.vercel.app/splash.png", "splashBackgroundColor": "#0052FF"}}}' />
-
-
-                {/* Favicon */}
-                <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔵</text></svg>" />
+                <link rel="icon" href="https://proof-of-day.vercel.app/icon.png" />
             </head>
             <body>
-                <WagmiProvider config={config}>
-                    <QueryClientProvider client={queryClient}>
-                        <RainbowKitProvider
-                            theme={darkTheme({
-                                accentColor: '#0052FF',
-                                accentColorForeground: 'white',
-                                borderRadius: 'medium',
-                            })}
-                        >
-                            {children}
-                        </RainbowKitProvider>
-                    </QueryClientProvider>
-                </WagmiProvider>
+                <Providers>{children}</Providers>
             </body>
         </html>
     );
