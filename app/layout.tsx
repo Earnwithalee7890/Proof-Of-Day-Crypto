@@ -1,28 +1,40 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import { Providers } from '@/components/Providers';
+
+export const viewport: Viewport = {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 1,
+    userScalable: false,
+};
+
+const frameConfig = {
+    version: "next",
+    imageUrl: "https://proof-of-day.vercel.app/og-image.png",
+    button: {
+        title: "Check In",
+        action: {
+            type: "launch_app",
+            name: "Proof Of Day",
+            url: "https://proof-of-day.vercel.app",
+            splashImageUrl: "https://proof-of-day.vercel.app/splash.png",
+            splashBackgroundColor: "#0052FF",
+        },
+    },
+};
 
 export const metadata: Metadata = {
     title: 'Proof Of Day',
     description: 'Show up every day on Base. Build your streak, earn rewards, prove your commitment onchain.',
-    viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
+    metadataBase: new URL('https://proof-of-day.vercel.app'),
     other: {
         'base:app_id': '694c5189c63ad876c9081210',
-        'fc:frame': JSON.stringify({
-            version: "next",
-            imageUrl: "https://proof-of-day.vercel.app/og-image.png",
-            homeUrl: "https://proof-of-day.vercel.app",
-            button: {
-                title: "Check In",
-                action: {
-                    type: "launch_app",
-                    name: "Proof Of Day",
-                    url: "https://proof-of-day.vercel.app",
-                    splashImageUrl: "https://proof-of-day.vercel.app/splash.png",
-                    splashBackgroundColor: "#0052FF",
-                },
-            },
-        }),
+        // Support both Frame v2 standards
+        'fc:frame': JSON.stringify(frameConfig),
+        'fc:miniapp': JSON.stringify(frameConfig),
+        // Fallback for discovery
+        'fc:frame:image': 'https://proof-of-day.vercel.app/og-image.png',
     },
     openGraph: {
         title: 'Proof Of Day',
@@ -31,7 +43,7 @@ export const metadata: Metadata = {
         siteName: 'Proof Of Day',
         images: [
             {
-                url: 'https://proof-of-day.vercel.app/og-image.png',
+                url: '/og-image.png',
                 width: 1200,
                 height: 630,
                 alt: 'Proof Of Day'
@@ -50,9 +62,9 @@ export default function RootLayout({
     return (
         <html lang="en">
             <head>
-                <link rel="icon" href="https://proof-of-day.vercel.app/icon.png" />
-                <link rel="apple-touch-icon" href="https://proof-of-day.vercel.app/icon.png" />
-                <link rel="manifest" href="https://proof-of-day.vercel.app/.well-known/farcaster.json" />
+                <link rel="icon" href="/icon.png" />
+                <link rel="apple-touch-icon" href="/icon.png" />
+                <link rel="manifest" href="/.well-known/farcaster.json" />
             </head>
             <body>
                 <Providers>{children}</Providers>
