@@ -1,5 +1,5 @@
-// Contract deployed at: 0x44b80503aec711f5f36958604d79547adc7d07e
-export const DAILY_CHECKIN_ADDRESS = '0x44b80503aec711f5f36958604d79547adc7d07e' as const;
+// Contract deployed at: 0x44B80503Aec711F5F36958604D79547ADC7D07ef
+export const DAILY_CHECKIN_ADDRESS = '0x44B80503Aec711F5F36958604D79547ADC7D07ef' as const;
 
 export const DAILY_CHECKIN_ABI = [
     {
