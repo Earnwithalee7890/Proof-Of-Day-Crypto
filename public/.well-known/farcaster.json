@@ -13,6 +13,16 @@
         "buttonTitle": "Check In",
         "splashImageUrl": "https://proof-of-day.vercel.app/splash.png",
         "splashBackgroundColor": "#0052FF",
-        "webhookUrl": "https://proof-of-day.vercel.app/api/webhook"
+        "webhookUrl": "https://proof-of-day.vercel.app/api/webhook",
+        "primaryCategory": "finance",
+        "tags": [
+            "checkin",
+            "proofofday",
+            "earn",
+            "proof",
+            "rewards"
+        ],
+        "subtitle": "Build your onchain streak and earn daily rewards on Base.",
+        "description": "Proof Of Day is a premium onchain check-in experience. Build your daily streak, earn ETH rewards from protocol fees, and prove your consistency on Base. Designed specifically for the Farcaster ecosystem, it turns your daily commitment into onchain reputation."
     }
 }
