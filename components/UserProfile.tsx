@@ -3,6 +3,7 @@
 import { useFarcasterAccount } from '@/hooks/useFarcasterAccount';
 import { useBaseAccount } from '@/hooks/useBaseAccount';
 import { useAccount } from 'wagmi';
+import { useBoostUserStats } from '@/hooks/useBoostUserStats';
 
 export default function UserProfile() {
     const { address } = useAccount();
@@ -16,6 +17,7 @@ export default function UserProfile() {
     } = useFarcasterAccount();
 
     const { basename, formattedAddress } = useBaseAccount();
+    const { streak: boostStreak } = useBoostUserStats();
 
     if (!address) return null;
 
@@ -87,10 +89,18 @@ export default function UserProfile() {
                     )}
                 </div>
 
-                {/* Status Indicator */}
-                <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-green-500/10 border border-green-500/20 text-green-400 text-[10px] font-black uppercase tracking-tighter">
-                    <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-                    Online
+                {/* Status Indicator & Boost Badge */}
+                <div className="hidden sm:flex flex-col items-end gap-2">
+                    {boostStreak > 0 && (
+                        <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-yellow-500/10 border border-yellow-500/20 text-yellow-500 text-[10px] font-black uppercase tracking-tighter milestone-glow">
+                            <span className="w-1.5 h-1.5 rounded-full bg-yellow-400 animate-pulse" />
+                            Boosted
+                        </div>
+                    )}
+                    <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-green-500/10 border border-green-500/20 text-green-400 text-[10px] font-black uppercase tracking-tighter">
+                        <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+                        Online
+                    </div>
                 </div>
             </div>
         </div>
