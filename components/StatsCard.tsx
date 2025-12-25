@@ -1,28 +1,20 @@
 'use client';
 
-import { useUserStats } from '@/hooks/useUserStats';
 import { useBoostUserStats } from '@/hooks/useBoostUserStats';
 import { formatTimestamp } from '@/utils/time';
 
 export default function StatsCard() {
     const {
-        streak: standardStreak,
-        pendingRewardsFormatted: standardRewards,
-        lastCheckIn: standardLast,
-        isLoading: standardLoading
-    } = useUserStats();
-
-    const {
-        streak: boostStreak,
-        pendingRewardsFormatted: boostRewards,
-        lastCheckIn: boostLast,
-        isLoading: boostLoading
+        streak,
+        pendingRewardsFormatted,
+        lastCheckIn,
+        isLoading
     } = useBoostUserStats();
 
-    if (standardLoading || boostLoading) {
+    if (isLoading) {
         return (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 animate-pulse">
-                {[1, 2, 3, 4].map((i) => (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 animate-pulse">
+                {[1, 2, 3].map((i) => (
                     <div key={i} className="stat-card h-32 bg-white/5" />
                 ))}
             </div>
@@ -31,29 +23,22 @@ export default function StatsCard() {
 
     const stats = [
         {
-            label: 'Standard Streak',
-            value: standardStreak,
-            suffix: standardStreak === 1 ? 'day' : 'days',
-            icon: '🔥',
-            gradient: 'from-blue-400 to-blue-600',
-        },
-        {
-            label: 'Boost Streak',
-            value: boostStreak,
-            suffix: boostStreak === 1 ? 'day' : 'days',
+            label: 'Premium Streak',
+            value: streak,
+            suffix: streak === 1 ? 'day' : 'days',
             icon: '⚡',
             gradient: 'from-yellow-400 to-orange-600',
         },
         {
-            label: 'Total Pending',
-            value: (parseFloat(standardRewards) + parseFloat(boostRewards)).toFixed(6),
+            label: 'Boost Rewards',
+            value: pendingRewardsFormatted,
             suffix: 'ETH',
             icon: '💎',
             gradient: 'from-purple-500 to-pink-600',
         },
         {
             label: 'Last Check-In',
-            value: formatTimestamp(Math.max(standardLast, boostLast)),
+            value: formatTimestamp(lastCheckIn),
             suffix: '',
             icon: '📅',
             gradient: 'from-green-500 to-teal-600',
@@ -61,7 +46,7 @@ export default function StatsCard() {
     ];
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {stats.map((stat, index) => (
                 <div
                     key={stat.label}

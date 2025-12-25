@@ -1,19 +1,9 @@
 'use client';
 
-import { useClaimRewards } from '@/hooks/useClaimRewards';
 import { useBoostClaimRewards } from '@/hooks/useBoostClaimRewards';
-import { useUserStats } from '@/hooks/useUserStats';
 import { useBoostUserStats } from '@/hooks/useBoostUserStats';
 
 export default function ClaimButton() {
-    const {
-        claimRewards: claimStandard,
-        isPending: standardPending,
-        isConfirming: standardConfirming,
-        isSuccess: standardSuccess,
-        error: standardError
-    } = useClaimRewards();
-
     const {
         claimRewards: claimBoost,
         isPending: boostPending,
@@ -22,17 +12,15 @@ export default function ClaimButton() {
         error: boostError
     } = useBoostClaimRewards();
 
-    const { pendingRewards: standardRewards, pendingRewardsFormatted: standardFormatted, refetch: refetchStandard } = useUserStats();
     const { pendingRewards: boostRewards, pendingRewardsFormatted: boostFormatted, refetch: refetchBoost } = useBoostUserStats();
 
-    const hasStandard = standardRewards > BigInt(0);
     const hasBoost = boostRewards > BigInt(0);
 
-    if (!hasStandard && !hasBoost && !standardSuccess && !boostSuccess) {
+    if (!hasBoost && !boostSuccess) {
         return (
             <div className="glass rounded-xl p-6 border-dashed border-2 border-white/10 text-center">
                 <p className="text-gray-400">
-                    No rewards to claim yet. Check in or Boost to earn rewards! 🎁
+                    No rewards to claim yet. Boost your check-in to earn rewards! 🎁
                 </p>
             </div>
         );
@@ -40,29 +28,7 @@ export default function ClaimButton() {
 
     return (
         <div className="space-y-4">
-            <div className="grid md:grid-cols-2 gap-4">
-                {/* Standard Claim */}
-                <button
-                    onClick={() => {
-                        claimStandard();
-                        setTimeout(() => refetchStandard(), 2000);
-                    }}
-                    disabled={!hasStandard || standardPending || standardConfirming || standardSuccess}
-                    className={`
-                        btn-primary w-full text-base py-4 rounded-xl flex items-center justify-center gap-2
-                        ${hasStandard && !standardPending && !standardConfirming && !standardSuccess ? 'glow' : 'opacity-50'}
-                        ${standardSuccess ? 'bg-green-600' : ''}
-                    `}
-                >
-                    {standardPending || standardConfirming ? (
-                        <div className="spinner h-4 w-4" />
-                    ) : standardSuccess ? (
-                        'Standard Claimed!'
-                    ) : (
-                        `Claim Standard (${standardFormatted} ETH)`
-                    )}
-                </button>
-
+            <div className="max-w-md mx-auto">
                 {/* Boost Claim */}
                 <button
                     onClick={() => {
@@ -71,7 +37,7 @@ export default function ClaimButton() {
                     }}
                     disabled={!hasBoost || boostPending || boostConfirming || boostSuccess}
                     className={`
-                        w-full text-base py-4 rounded-xl flex items-center justify-center gap-2 border-2
+                        w-full text-lg py-5 rounded-2xl flex items-center justify-center gap-3 border-2 transition-all duration-500
                         ${hasBoost && !boostPending && !boostConfirming && !boostSuccess
                             ? 'border-yellow-500/50 bg-black/40 text-yellow-500 shadow-lg shadow-yellow-500/20 glow-strong'
                             : 'border-white/10 opacity-50'
@@ -80,20 +46,30 @@ export default function ClaimButton() {
                     `}
                 >
                     {boostPending || boostConfirming ? (
-                        <div className="spinner !border-yellow-500 h-4 w-4" />
+                        <div className="spinner !border-yellow-500 h-5 w-5" />
                     ) : boostSuccess ? (
-                        'Boosted Rewards Claimed!'
+                        <span className="flex items-center gap-2">
+                            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                            </svg>
+                            Rewards Claimed!
+                        </span>
                     ) : (
-                        `Claim Boost (${boostFormatted} ETH)`
+                        <span className="flex items-center gap-2">
+                            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            Claim {boostFormatted} ETH
+                        </span>
                     )}
                 </button>
             </div>
 
-            {(standardError || boostError) && (
+            {boostError && (
                 <div className="p-3 glass rounded-lg border border-red-500/50 text-red-400 text-sm">
                     <p className="font-semibold">Error:</p>
                     <p className="opacity-80">
-                        {((standardError || boostError) as Error).message}
+                        {(boostError as Error).message}
                     </p>
                 </div>
             )}

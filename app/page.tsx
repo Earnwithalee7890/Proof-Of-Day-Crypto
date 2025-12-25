@@ -4,7 +4,6 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useAccount, useConnect } from 'wagmi';
 import { useEffect } from 'react';
 import sdk from '@farcaster/frame-sdk';
-import CheckInButton from '@/components/CheckInButton';
 import BoostCheckInButton from '@/components/BoostCheckInButton';
 import StatsCard from '@/components/StatsCard';
 import ClaimButton from '@/components/ClaimButton';
@@ -12,7 +11,6 @@ import StreakVisual from '@/components/StreakVisual';
 import ShareButton from '@/components/ShareButton';
 import UserProfile from '@/components/UserProfile';
 import AnimatedBackground from '@/components/AnimatedBackground';
-import { DAILY_CHECKIN_ADDRESS } from '@/contracts/DailyCheckIn';
 import { DAILY_CHECKIN_WITH_FEES_ADDRESS } from '@/contracts/DailyCheckInWithFees';
 
 export default function Home() {
@@ -111,45 +109,23 @@ export default function Home() {
                             </div>
 
                             {/* Contract Grid */}
-                            <div className="grid md:grid-cols-2 gap-6">
-                                <div className="space-y-4">
-                                    <div className="text-center space-y-2">
-                                        <h4 className="font-bold text-gray-400 uppercase tracking-widest text-xs">Standard</h4>
-                                        <CheckInButton />
-                                    </div>
-                                    <div className="pt-2 text-center">
-                                        <button
-                                            onClick={() => {
-                                                navigator.clipboard.writeText(DAILY_CHECKIN_ADDRESS);
-                                            }}
-                                            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg glass glass-hover text-[10px] font-mono group"
-                                            title="Copy Standard Contract"
-                                        >
-                                            <span className="text-gray-500 group-hover:text-white transition-colors">
-                                                Standard: <span className="text-base-blue">{DAILY_CHECKIN_ADDRESS.slice(0, 6)}...{DAILY_CHECKIN_ADDRESS.slice(-4)}</span>
-                                            </span>
-                                        </button>
-                                    </div>
+                            <div className="max-w-md mx-auto space-y-4">
+                                <div className="text-center space-y-2">
+                                    <h4 className="font-bold text-yellow-500/80 uppercase tracking-widest text-xs">Premium Check-In</h4>
+                                    <BoostCheckInButton />
                                 </div>
-
-                                <div className="space-y-4">
-                                    <div className="text-center space-y-2">
-                                        <h4 className="font-bold text-yellow-500/80 uppercase tracking-widest text-xs">Boosted</h4>
-                                        <BoostCheckInButton />
-                                    </div>
-                                    <div className="pt-2 text-center">
-                                        <button
-                                            onClick={() => {
-                                                navigator.clipboard.writeText(DAILY_CHECKIN_WITH_FEES_ADDRESS);
-                                            }}
-                                            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg glass glass-hover text-[10px] font-mono group"
-                                            title="Copy Boost Contract"
-                                        >
-                                            <span className="text-gray-500 group-hover:text-white transition-colors">
-                                                Boost: <span className="text-yellow-500/60">{DAILY_CHECKIN_WITH_FEES_ADDRESS.slice(0, 6)}...{DAILY_CHECKIN_WITH_FEES_ADDRESS.slice(-4)}</span>
-                                            </span>
-                                        </button>
-                                    </div>
+                                <div className="pt-2 text-center">
+                                    <button
+                                        onClick={() => {
+                                            navigator.clipboard.writeText(DAILY_CHECKIN_WITH_FEES_ADDRESS);
+                                        }}
+                                        className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg glass glass-hover text-[10px] font-mono group"
+                                        title="Copy Boost Contract"
+                                    >
+                                        <span className="text-gray-500 group-hover:text-white transition-colors">
+                                            Boost: <span className="text-yellow-500/60">{DAILY_CHECKIN_WITH_FEES_ADDRESS.slice(0, 6)}...{DAILY_CHECKIN_WITH_FEES_ADDRESS.slice(-4)}</span>
+                                        </span>
+                                    </button>
                                 </div>
                             </div>
                         </div>
