@@ -23,6 +23,12 @@
             "rewards"
         ],
         "subtitle": "Daily check-ins, ETH rewards.",
-        "description": "Proof Of Day is a premium streak-based reward app. Build your daily streak on Base, earn ETH from protocol fees, and prove your consistency in the Farcaster ecosystem."
+        "description": "Proof Of Day is a premium streak-based reward app. Build your daily streak on Base, earn ETH from protocol fees, and prove your consistency in the Farcaster ecosystem.",
+        "heroImageUrl": "https://proof-of-day.vercel.app/og.png",
+        "tagline": "Consistency pays off with ETH rewards.",
+        "ogTitle": "Proof Of Day - Daily Streaks & Rewards",
+        "ogDescription": "Build your streak and earn direct ETH rewards on Base. The premium onchain check-in experience.",
+        "ogImageUrl": "https://proof-of-day.vercel.app/og.png",
+        "castShareUrl": "https://warpcast.com/~/compose?text=I'm%20building%20my%20streak%20on%20Proof%20Of%20Day!%20Check%20in%20daily%20to%20earn%20ETH%20rewards%20on%20Base.%20⚡%0A%0Ahttps://proof-of-day.vercel.app"
     }
 }
