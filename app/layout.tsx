@@ -9,9 +9,54 @@ export const viewport: Viewport = {
     userScalable: false,
 };
 
+const appUrl = 'https://proof-of-day.vercel.app';
+
 export const metadata: Metadata = {
     title: 'Proof Of Day',
     description: 'Show up every day on Base. Build your streak, earn rewards, prove your commitment onchain.',
+    openGraph: {
+        title: 'Proof Of Day',
+        description: 'Show up every day on Base. Build your streak, earn rewards, prove your commitment onchain.',
+        url: appUrl,
+        siteName: 'Proof Of Day',
+        images: [
+            {
+                url: `${appUrl}/og.png`,
+                width: 1200,
+                height: 630,
+                alt: 'Proof Of Day',
+            },
+        ],
+        locale: 'en_US',
+        type: 'website',
+    },
+    other: {
+        'base:app_id': '694c5189c63ad876c9081210',
+        // Farcaster Frame v2 / Mini App JSON Manifest
+        'fc:frame': JSON.stringify({
+            version: "next",
+            imageUrl: `${appUrl}/og.png`,
+            button: {
+                title: "Check In",
+                action: {
+                    type: "launch_app",
+                    name: "Proof Of Day",
+                    url: appUrl,
+                    splashImageUrl: `${appUrl}/splash.png`,
+                    splashBackgroundColor: "#0052FF",
+                },
+            },
+        }),
+        // Farcaster Embed Fallback Tags (Strictly following user's Provided Docs)
+        'fc:frame:image': `${appUrl}/og.png`,
+        'fc:frame:button:1': 'Check In',
+        'fc:frame:button:1:action': 'link',
+        'fc:frame:button:1:target': appUrl,
+        'fc:miniapp': 'true',
+        'fc:miniapp:name': 'Proof Of Day',
+        'fc:miniapp:url': appUrl,
+        'fc:miniapp:icon': `${appUrl}/icon.png`,
+    },
 };
 
 export default function RootLayout({
@@ -19,48 +64,12 @@ export default function RootLayout({
 }: {
     children: React.ReactNode;
 }) {
-    // Spec-perfect JSON for Farcaster Mini Apps (Frame v2)
-    const frameJson = JSON.stringify({
-        version: "next",
-        imageUrl: "https://proof-of-day.vercel.app/og-image.png",
-        button: {
-            title: "Check In",
-            action: {
-                type: "launch_app",
-                name: "Proof Of Day",
-                url: "https://proof-of-day.vercel.app",
-                splashImageUrl: "https://proof-of-day.vercel.app/splash.png",
-                splashBackgroundColor: "#0052FF",
-            },
-        },
-    });
-
     return (
         <html lang="en">
             <head>
-                {/* Farcaster Frame v2 / Mini App - Dual Tagging for max compatibility */}
-                <meta name="fc:frame" content={frameJson} />
-                <meta property="fc:frame" content={frameJson} />
-
-                <meta name="fc:miniapp" content={frameJson} />
-                <meta property="fc:miniapp" content={frameJson} />
-
-                <meta name="fc:frame:image" content="https://proof-of-day.vercel.app/og-image.png" />
-                <meta property="fc:frame:image" content="https://proof-of-day.vercel.app/og-image.png" />
-
-                {/* Domain Verification & Social */}
-                <meta name="base:app_id" content="694c5189c63ad876c9081210" />
-                <meta property="og:title" content="Proof Of Day" />
-                <meta property="og:description" content="Show up every day on Base. Build your streak, earn rewards, prove your commitment onchain." />
-                <meta property="og:image" content="https://proof-of-day.vercel.app/og-image.png" />
-                <meta property="og:url" content="https://proof-of-day.vercel.app" />
-                <meta property="og:type" content="website" />
-
-                {/* Branding Assets (Force Absolute) */}
-                <link rel="icon" href="https://proof-of-day.vercel.app/icon.png" />
-                <link rel="apple-touch-icon" href="https://proof-of-day.vercel.app/icon.png" />
-                <link rel="shortcut icon" href="https://proof-of-day.vercel.app/icon.png" />
-                <link rel="manifest" href="https://proof-of-day.vercel.app/.well-known/farcaster.json" />
+                <link rel="icon" href={`${appUrl}/icon.png`} />
+                <link rel="apple-touch-icon" href={`${appUrl}/icon.png`} />
+                <link rel="manifest" href={`${appUrl}/.well-known/farcaster.json`} />
             </head>
             <body>
                 <Providers>{children}</Providers>
