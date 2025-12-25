@@ -32,7 +32,6 @@ export const metadata: Metadata = {
     },
     other: {
         'base:app_id': '694c5189c63ad876c9081210',
-        // Farcaster Frame v2 / Mini App JSON Manifest
         'fc:frame': JSON.stringify({
             version: "next",
             imageUrl: `${appUrl}/og.png`,
@@ -47,7 +46,6 @@ export const metadata: Metadata = {
                 },
             },
         }),
-        // Farcaster Embed Fallback Tags (Strictly following user's Provided Docs)
         'fc:frame:image': `${appUrl}/og.png`,
         'fc:frame:button:1': 'Check In',
         'fc:frame:button:1:action': 'link',
