@@ -22,7 +22,7 @@
             "proof",
             "rewards"
         ],
-        "subtitle": "Build your onchain streak and earn daily rewards on Base.",
-        "description": "Proof Of Day is a premium onchain check-in experience. Build your daily streak, earn ETH rewards from protocol fees, and prove your consistency on Base. Designed specifically for the Farcaster ecosystem, it turns your daily commitment into onchain reputation."
+        "subtitle": "Daily check-ins, ETH rewards.",
+        "description": "Proof Of Day is a premium streak-based reward app. Build your daily streak on Base, earn ETH from protocol fees, and prove your consistency in the Farcaster ecosystem."
     }
 }
