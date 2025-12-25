@@ -9,7 +9,7 @@
         "name": "Proof Of Day",
         "iconUrl": "https://proof-of-day.vercel.app/icon.png",
         "homeUrl": "https://proof-of-day.vercel.app",
-        "imageUrl": "https://proof-of-day.vercel.app/og-image.png",
+        "imageUrl": "https://proof-of-day.vercel.app/og.png",
         "buttonTitle": "Check In",
         "splashImageUrl": "https://proof-of-day.vercel.app/splash.png",
         "splashBackgroundColor": "#0052FF",
