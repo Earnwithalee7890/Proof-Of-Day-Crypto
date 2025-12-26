@@ -45,8 +45,8 @@ export async function generateMetadata({
             if (!username || !pfp) {
                 const fcUser = await getFarcasterUserByAddress(address);
                 if (fcUser) {
-                    username = username || fcUser.username || fcUser.display_name;
-                    pfp = pfp || fcUser.pfp_url;
+                    username = username || fcUser.username || fcUser.display_name || '';
+                    pfp = pfp || fcUser.pfp_url || '';
                     score = score || (fcUser.profile?.reputation_score || fcUser.reputation_score)?.toString() || '';
                 }
             }
