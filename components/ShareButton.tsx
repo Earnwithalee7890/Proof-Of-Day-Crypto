@@ -2,15 +2,18 @@
 
 import { useUserStats } from '@/hooks/useUserStats';
 import { useAccount } from 'wagmi';
+import { useFarcasterAccount } from '@/hooks/useFarcasterAccount';
 
 export default function ShareButton() {
     const { streak, pendingRewardsFormatted } = useUserStats();
     const { address } = useAccount();
+    const { username, pfp } = useFarcasterAccount();
 
     const handleShare = () => {
-        const shareText = `Just checked in on @base! 🔵\n\n🔥 ${streak} day streak\n💎 ${pendingRewardsFormatted} ETH earned\n\nProof of showing up, onchain.\n\nJoin the streak: https://proof-of-day.vercel.app`;
+        const shareText = `Just checked in on @base! 🔵\n\n🔥 ${streak} day streak\n💎 ${pendingRewardsFormatted} ETH earned\n\nProof of showing up, onchain.\n\nJoin the streak:`;
 
-        const warpcastUrl = `https://warpcast.com/~/compose?text=${encodeURIComponent(shareText)}&embeds[]=https://proof-of-day.vercel.app`;
+        const shareUrl = `https://proof-of-day.vercel.app/?address=${address}&streak=${streak}&rewards=${pendingRewardsFormatted}${username ? `&username=${encodeURIComponent(username)}` : ''}${pfp ? `&pfp=${encodeURIComponent(pfp)}` : ''}`;
+        const warpcastUrl = `https://warpcast.com/~/compose?text=${encodeURIComponent(shareText)}&embeds[]=${encodeURIComponent(shareUrl)}`;
         window.open(warpcastUrl, '_blank');
     };
 

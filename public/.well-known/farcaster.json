@@ -30,5 +30,14 @@
         "ogDescription": "Build your streak and earn direct ETH rewards on Base. The premium onchain check-in experience.",
         "ogImageUrl": "https://proof-of-day.vercel.app/og.png",
         "castShareUrl": "https://warpcast.com/~/compose?text=I'm%20building%20my%20streak%20on%20Proof%20Of%20Day!%20Check%20in%20daily%20to%20earn%20ETH%20rewards%20on%20Base.%20⚡%0A%0Ahttps://proof-of-day.vercel.app"
+    },
+    "composerAction": {
+        "type": "createCast",
+        "name": "Proof Of Day",
+        "icon": "note",
+        "description": "Share your daily streak and rewards",
+        "aboutUrl": "https://proof-of-day.vercel.app",
+        "imageUrl": "https://proof-of-day.vercel.app/og.png",
+        "actionUrl": "https://proof-of-day.vercel.app/api/composer"
     }
 }
