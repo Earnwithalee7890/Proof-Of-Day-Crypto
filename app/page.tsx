@@ -41,15 +41,19 @@ export async function generateMetadata({
             console.error('Error fetching onchain stats for metadata:', e);
         }
     }
+    // Dynamic OG Image URL - Shortened to prevent Frame scraping issues
+    const ogImageUrl = address
+        ? `${appUrl}/api/og?streak=${streak}&rewards=${rewards}&username=${encodeURIComponent(username)}${pfp ? `&pfp=${encodeURIComponent(pfp)}` : ''}`
+        : `${appUrl}/og.png`;
 
-    // Final JSON for the Embed Meta Tags
+    // Final JSON for the Embed Meta Tags - Using launch_frame (legacy but more compatible)
     const miniappEmbed = JSON.stringify({
         version: "1",
         imageUrl: ogImageUrl,
         button: {
-            title: "Open App",
+            title: "Check In",
             action: {
-                type: "launch_miniapp",
+                type: "launch_frame",
                 name: "Proof Of Day",
                 url: appUrl,
                 splashImageUrl: `${appUrl}/splash.png`,
@@ -69,7 +73,7 @@ export async function generateMetadata({
             'fc:frame': miniappEmbed,
             'fc:frame:image': ogImageUrl,
             'fc:frame:image:aspect_ratio': '1.91:1',
-            'fc:frame:button:1': "Open App",
+            'fc:frame:button:1': "Check In",
             'fc:frame:button:1:action': 'post',
         },
     };
