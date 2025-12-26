@@ -48,5 +48,6 @@ export function useFarcasterAccount() {
         displayName: farcasterUser?.display_name || null,
         pfp: farcasterUser?.pfp_url || null,
         fid: farcasterUser?.fid || null,
+        score: farcasterUser?.profile?.reputation_score || farcasterUser?.reputation_score || null,
     };
 }

@@ -11,7 +11,7 @@ export async function GET(req: NextRequest) {
         const streak = searchParams.get('streak') || '0';
         const rewards = searchParams.get('rewards') || '0';
         const pfp = searchParams.get('pfp');
-        const score = searchParams.get('score');
+        const score = searchParams.get('score') || streak; // Use streak as default score if none provided
 
         return new ImageResponse(
             (
@@ -24,127 +24,132 @@ export async function GET(req: NextRequest) {
                         alignItems: 'center',
                         justifyContent: 'center',
                         backgroundColor: '#050505',
-                        backgroundImage: 'radial-gradient(circle at 50% 50%, #0052FF20 0%, #050505 100%)',
-                        padding: '40px',
+                        // Mesh gradient inspired by the user's image (coral -> teal -> purple)
+                        backgroundImage: 'linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 50%, #A06EE1 100%)',
+                        fontFamily: 'sans-serif',
+                        position: 'relative',
                     }}
                 >
-                    {/* Background Orbs */}
-                    <div style={{ position: 'absolute', top: '-100px', left: '-100px', width: '400px', height: '400px', borderRadius: '200px', backgroundColor: 'rgba(0, 82, 255, 0.06)', filter: 'blur(80px)' }} />
-                    <div style={{ position: 'absolute', bottom: '-100px', right: '-100px', width: '400px', height: '400px', borderRadius: '200px', backgroundColor: 'rgba(124, 58, 237, 0.06)', filter: 'blur(80px)' }} />
+                    {/* Top Left App Icon */}
+                    <div style={{ position: 'absolute', top: '40px', left: '40px', display: 'flex' }}>
+                        <div style={{
+                            width: '48px',
+                            height: '48px',
+                            backgroundColor: '#0052FF',
+                            borderRadius: '12px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            boxShadow: '0 4px 12px rgba(0,0,0,0.3)'
+                        }}>
+                            <img src="https://proof-of-day.vercel.app/icon.png" style={{ width: '40px', height: '40px', borderRadius: '8px' }} />
+                        </div>
+                    </div>
 
+                    {/* Content Container */}
                     <div
                         style={{
                             display: 'flex',
                             flexDirection: 'column',
                             alignItems: 'center',
-                            backgroundColor: 'rgba(255, 255, 255, 0.03)',
-                            borderRadius: '40px',
+                            justifyContent: 'center',
+                            width: '100%',
+                            height: '100%',
                             padding: '60px',
-                            border: '1px solid rgba(255, 255, 255, 0.1)',
                         }}
                     >
-                        {/* Profile Section */}
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '24px', marginBottom: '40px' }}>
+                        {/* Profile Picture centered at top */}
+                        <div style={{ display: 'flex', marginBottom: '30px' }}>
                             {pfp ? (
                                 <img
                                     src={pfp}
                                     style={{
-                                        width: '100px',
-                                        height: '100px',
-                                        borderRadius: '50px',
-                                        border: '4px solid #0052FF',
+                                        width: '180px',
+                                        height: '180px',
+                                        borderRadius: '90px',
+                                        border: '8px solid white',
+                                        boxShadow: '0 20px 40px rgba(0,0,0,0.2)',
+                                        objectFit: 'cover'
                                     }}
                                 />
                             ) : (
                                 <div
                                     style={{
-                                        width: '100px',
-                                        height: '100px',
-                                        borderRadius: '50px',
+                                        width: '180px',
+                                        height: '180px',
+                                        borderRadius: '90px',
                                         backgroundColor: '#0052FF',
                                         display: 'flex',
                                         alignItems: 'center',
                                         justifyContent: 'center',
-                                        fontSize: '48px',
+                                        fontSize: '80px',
                                         color: 'white',
+                                        border: '8px solid white',
+                                        boxShadow: '0 20px 40px rgba(0,0,0,0.2)',
                                     }}
                                 >
                                     {username[0]?.toUpperCase() || 'P'}
                                 </div>
                             )}
-                            <div style={{ display: 'flex', flexDirection: 'column' }}>
-                                <span style={{ fontSize: '42px', fontWeight: '900', color: 'white', letterSpacing: '-0.05em' }}>
-                                    {username}
-                                </span>
-                                <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                                    <span style={{ fontSize: '18px', fontWeight: '700', color: '#0052FF', textTransform: 'uppercase', letterSpacing: '0.2em' }}>
-                                        Onchain Commitment
-                                    </span>
-                                    {score && (
-                                        <span style={{ fontSize: '14px', fontWeight: '800', backgroundColor: 'rgba(0, 82, 255, 0.15)', color: '#0052FF', padding: '4px 8px', borderRadius: '6px' }}>
-                                            Rep: {score}
-                                        </span>
-                                    )}
-                                </div>
-                            </div>
                         </div>
 
-                        {/* Stats Grid */}
-                        <div style={{ display: 'flex', gap: '40px' }}>
-                            {/* Streak Card */}
-                            <div
-                                style={{
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    alignItems: 'center',
-                                    backgroundColor: 'rgba(255, 255, 0, 0.05)',
-                                    padding: '30px 50px',
-                                    borderRadius: '30px',
-                                    border: '1px solid rgba(255, 255, 0, 0.2)',
-                                }}
-                            >
-                                <span style={{ fontSize: '16px', fontWeight: '800', color: '#EAB308', textTransform: 'uppercase', marginBottom: '10px' }}>
-                                    Streak
-                                </span>
-                                <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px' }}>
-                                    <span style={{ fontSize: '72px', fontWeight: '900', color: 'white' }}>{streak}</span>
-                                    <span style={{ fontSize: '24px', fontWeight: '700', color: '#EAB308' }}>Days</span>
-                                </div>
-                                <span style={{ fontSize: '32px', marginTop: '10px' }}>🔥</span>
-                            </div>
-
-                            {/* Rewards Card */}
-                            <div
-                                style={{
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    alignItems: 'center',
-                                    backgroundColor: 'rgba(0, 82, 255, 0.05)',
-                                    padding: '30px 50px',
-                                    borderRadius: '30px',
-                                    border: '1px solid rgba(0, 82, 255, 0.2)',
-                                }}
-                            >
-                                <span style={{ fontSize: '16px', fontWeight: '800', color: '#0052FF', textTransform: 'uppercase', marginBottom: '10px' }}>
-                                    Earned
-                                </span>
-                                <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px' }}>
-                                    <span style={{ fontSize: '72px', fontWeight: '900', color: 'white' }}>{rewards}</span>
-                                    <span style={{ fontSize: '24px', fontWeight: '700', color: '#0052FF' }}>ETH</span>
-                                </div>
-                                <span style={{ fontSize: '32px', marginTop: '10px' }}>💎</span>
-                            </div>
+                        {/* Title text */}
+                        <div style={{
+                            fontSize: '48px',
+                            fontWeight: '600',
+                            color: 'white',
+                            marginBottom: '20px',
+                            textShadow: '0 2px 10px rgba(0,0,0,0.1)',
+                            opacity: 0.9,
+                        }}>
+                            {username}'s Proof Score
                         </div>
 
-                        {/* Footer */}
-                        <div style={{ marginTop: '50px', display: 'flex', alignItems: 'center', gap: '12px' }}>
-                            <div style={{ width: '32px', height: '32px', borderRadius: '8px', backgroundColor: '#0052FF', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                <img src="https://proof-of-day.vercel.app/icon.png" style={{ width: '32px', height: '32px', borderRadius: '8px' }} />
-                            </div>
-                            <span style={{ fontSize: '24px', fontWeight: '900', color: 'white', letterSpacing: '-0.02em', textTransform: 'uppercase' }}>
-                                Proof Of Day
-                            </span>
+                        {/* Large Score/Streak */}
+                        <div style={{
+                            fontSize: '180px',
+                            fontWeight: '900',
+                            color: 'white',
+                            lineHeight: 1,
+                            textShadow: '0 10px 30px rgba(0,0,0,0.2)',
+                            marginBottom: '10px'
+                        }}>
+                            {score}
                         </div>
+
+                        {/* Label */}
+                        <div style={{
+                            fontSize: '32px',
+                            fontWeight: '700',
+                            color: 'white',
+                            opacity: 0.8,
+                            textTransform: 'uppercase',
+                            letterSpacing: '2px'
+                        }}>
+                            Daily Streak 🔥
+                        </div>
+                    </div>
+
+                    {/* Bottom White Strip "Button" */}
+                    <div style={{
+                        position: 'absolute',
+                        bottom: '0',
+                        width: '100%',
+                        backgroundColor: 'white',
+                        padding: '30px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                    }}>
+                        <span style={{
+                            color: '#7C3AED',
+                            fontSize: '28px',
+                            fontWeight: '800',
+                            textTransform: 'uppercase',
+                            letterSpacing: '1px'
+                        }}>
+                            Check Proof Of Day
+                        </span>
                     </div>
                 </div>
             ),

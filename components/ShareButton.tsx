@@ -7,12 +7,12 @@ import { useFarcasterAccount } from '@/hooks/useFarcasterAccount';
 export default function ShareButton() {
     const { streak, pendingRewardsFormatted } = useUserStats();
     const { address } = useAccount();
-    const { username, pfp } = useFarcasterAccount();
+    const { username, pfp, score } = useFarcasterAccount();
 
     const handleShare = () => {
-        const shareText = `Just checked in on @base! 🔵\n\n🔥 ${streak} day streak\n💎 ${pendingRewardsFormatted} ETH earned\n\nProof of showing up, onchain.\n\nJoin the streak:`;
+        const shareText = `Proving my commitment daily on @base! 🔵 🔥\n\nJoin my streak on Proof Of Day:`;
 
-        const shareUrl = `https://proof-of-day.vercel.app/?address=${address}&streak=${streak}&rewards=${pendingRewardsFormatted}${username ? `&username=${encodeURIComponent(username)}` : ''}${pfp ? `&pfp=${encodeURIComponent(pfp)}` : ''}`;
+        const shareUrl = `https://proof-of-day.vercel.app/?address=${address}&streak=${streak}&rewards=${pendingRewardsFormatted}${username ? `&username=${encodeURIComponent(username)}` : ''}${pfp ? `&pfp=${encodeURIComponent(pfp)}` : ''}${score ? `&score=${score}` : ''}`;
         const warpcastUrl = `https://warpcast.com/~/compose?text=${encodeURIComponent(shareText)}&embeds[]=${encodeURIComponent(shareUrl)}`;
         window.open(warpcastUrl, '_blank');
     };
