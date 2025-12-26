@@ -11,7 +11,7 @@ export async function GET(req: NextRequest) {
         const streak = searchParams.get('streak') || '0';
         const rewards = searchParams.get('rewards') || '0';
         const pfp = searchParams.get('pfp');
-        const score = searchParams.get('score') || streak; // Use streak as default score if none provided
+        const score = searchParams.get('score') || streak;
 
         return new ImageResponse(
             (
@@ -24,7 +24,6 @@ export async function GET(req: NextRequest) {
                         alignItems: 'center',
                         justifyContent: 'center',
                         backgroundColor: '#050505',
-                        // Mesh gradient inspired by the user's image (coral -> teal -> purple)
                         backgroundImage: 'linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 50%, #A06EE1 100%)',
                         fontFamily: 'sans-serif',
                         position: 'relative',
@@ -58,34 +57,34 @@ export async function GET(req: NextRequest) {
                             padding: '60px',
                         }}
                     >
-                        {/* Profile Picture centered at top */}
-                        <div style={{ display: 'flex', marginBottom: '30px' }}>
+                        {/* Profile Picture */}
+                        <div style={{ display: 'flex', marginBottom: '20px' }}>
                             {pfp ? (
                                 <img
                                     src={pfp}
                                     style={{
-                                        width: '180px',
-                                        height: '180px',
-                                        borderRadius: '90px',
-                                        border: '8px solid white',
-                                        boxShadow: '0 20px 40px rgba(0,0,0,0.2)',
+                                        width: '140px',
+                                        height: '140px',
+                                        borderRadius: '70px',
+                                        border: '6px solid white',
+                                        boxShadow: '0 15px 30px rgba(0,0,0,0.2)',
                                         objectFit: 'cover'
                                     }}
                                 />
                             ) : (
                                 <div
                                     style={{
-                                        width: '180px',
-                                        height: '180px',
-                                        borderRadius: '90px',
+                                        width: '140px',
+                                        height: '140px',
+                                        borderRadius: '70px',
                                         backgroundColor: '#0052FF',
                                         display: 'flex',
                                         alignItems: 'center',
                                         justifyContent: 'center',
-                                        fontSize: '80px',
+                                        fontSize: '60px',
                                         color: 'white',
-                                        border: '8px solid white',
-                                        boxShadow: '0 20px 40px rgba(0,0,0,0.2)',
+                                        border: '6px solid white',
+                                        boxShadow: '0 15px 30px rgba(0,0,0,0.2)',
                                     }}
                                 >
                                     {username[0]?.toUpperCase() || 'P'}
@@ -93,40 +92,70 @@ export async function GET(req: NextRequest) {
                             )}
                         </div>
 
-                        {/* Title text */}
+                        {/* Username */}
                         <div style={{
-                            fontSize: '48px',
+                            fontSize: '42px',
                             fontWeight: '600',
                             color: 'white',
-                            marginBottom: '20px',
+                            marginBottom: '10px',
                             textShadow: '0 2px 10px rgba(0,0,0,0.1)',
                             opacity: 0.9,
                         }}>
-                            {username}'s Proof Score
+                            {username}
                         </div>
 
-                        {/* Large Score/Streak */}
-                        <div style={{
-                            fontSize: '180px',
-                            fontWeight: '900',
-                            color: 'white',
-                            lineHeight: 1,
-                            textShadow: '0 10px 30px rgba(0,0,0,0.2)',
-                            marginBottom: '10px'
-                        }}>
-                            {score}
-                        </div>
+                        {/* Stats Grid */}
+                        <div style={{ display: 'flex', gap: '60px', alignItems: 'center', marginTop: '10px' }}>
+                            {/* Streak Section */}
+                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                <div style={{
+                                    fontSize: '120px',
+                                    fontWeight: '900',
+                                    color: 'white',
+                                    lineHeight: 1,
+                                    textShadow: '0 10px 30px rgba(0,0,0,0.2)',
+                                }}>
+                                    {score}
+                                </div>
+                                <div style={{
+                                    fontSize: '24px',
+                                    fontWeight: '700',
+                                    color: 'white',
+                                    opacity: 0.8,
+                                    textTransform: 'uppercase',
+                                    letterSpacing: '2px',
+                                    marginTop: '5px'
+                                }}>
+                                    Streak 🔥
+                                </div>
+                            </div>
 
-                        {/* Label */}
-                        <div style={{
-                            fontSize: '32px',
-                            fontWeight: '700',
-                            color: 'white',
-                            opacity: 0.8,
-                            textTransform: 'uppercase',
-                            letterSpacing: '2px'
-                        }}>
-                            Daily Streak 🔥
+                            {/* Divider Line */}
+                            <div style={{ width: '2px', height: '100px', backgroundColor: 'rgba(255,255,255,0.3)', borderRadius: '1px' }} />
+
+                            {/* Rewards Section */}
+                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                <div style={{
+                                    fontSize: '120px',
+                                    fontWeight: '900',
+                                    color: 'white',
+                                    lineHeight: 1,
+                                    textShadow: '0 10px 30px rgba(0,0,0,0.2)',
+                                }}>
+                                    {rewards}
+                                </div>
+                                <div style={{
+                                    fontSize: '24px',
+                                    fontWeight: '700',
+                                    color: 'white',
+                                    opacity: 0.8,
+                                    textTransform: 'uppercase',
+                                    letterSpacing: '2px',
+                                    marginTop: '5px'
+                                }}>
+                                    ETH Earned 💎
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -136,19 +165,19 @@ export async function GET(req: NextRequest) {
                         bottom: '0',
                         width: '100%',
                         backgroundColor: 'white',
-                        padding: '30px',
+                        padding: '25px',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
                     }}>
                         <span style={{
                             color: '#7C3AED',
-                            fontSize: '28px',
+                            fontSize: '24px',
                             fontWeight: '800',
                             textTransform: 'uppercase',
                             letterSpacing: '1px'
                         }}>
-                            Check Proof Of Day
+                            Join Proof Of Day
                         </span>
                     </div>
                 </div>
