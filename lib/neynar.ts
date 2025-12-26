@@ -18,10 +18,23 @@ export async function getFarcasterUserByAddress(address: string) {
     }
 
     try {
-        const response = await neynarClient.fetchBulkUsersByEthOrSolAddress({ addresses: [address] });
-        return response && response[address] && response[address].length > 0
-            ? response[address][0]
-            : null;
+        const lowerAddr = address.toLowerCase();
+        const response = await neynarClient.fetchBulkUsersByEthOrSolAddress({ addresses: [address, lowerAddr] });
+
+        // Try to find the user using the original address or the lowercase version
+        const userList = response[address] || response[lowerAddr];
+
+        if (userList && userList.length > 0) {
+            return userList[0];
+        }
+
+        // Final attempt: check if any key in the response matches (case-insensitive)
+        const matchedKey = Object.keys(response).find(key => key.toLowerCase() === lowerAddr);
+        if (matchedKey && response[matchedKey].length > 0) {
+            return response[matchedKey][0];
+        }
+
+        return null;
     } catch (error) {
         console.error('Error fetching Farcaster user:', error);
         return null;

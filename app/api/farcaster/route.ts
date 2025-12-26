@@ -1,9 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { NeynarAPIClient } from '@neynar/nodejs-sdk';
 
-const client = process.env.NEXT_PUBLIC_NEYNAR_API_KEY
-    ? new NeynarAPIClient({ apiKey: process.env.NEXT_PUBLIC_NEYNAR_API_KEY })
-    : null;
+const apiKey = process.env.NEYNAR_API_KEY || process.env.NEXT_PUBLIC_NEYNAR_API_KEY;
+const client = apiKey ? new NeynarAPIClient({ apiKey }) : null;
 
 export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams;
