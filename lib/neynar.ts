@@ -1,6 +1,6 @@
 import { NeynarAPIClient } from '@neynar/nodejs-sdk';
 
-const apiKey = process.env.NEXT_PUBLIC_NEYNAR_API_KEY || '';
+const apiKey = process.env.NEYNAR_API_KEY || process.env.NEXT_PUBLIC_NEYNAR_API_KEY || '';
 
 export const neynarClient = apiKey ? new NeynarAPIClient({ apiKey }) : null;
 
