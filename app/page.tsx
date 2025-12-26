@@ -1,5 +1,8 @@
 import { Metadata } from 'next';
 import HomeClient from './HomeClient';
+import { createPublicClient, http, formatEther } from 'viem';
+import { base } from 'viem/chains';
+import { DAILY_CHECKIN_WITH_FEES_ADDRESS, DAILY_CHECKIN_WITH_FEES_ABI } from '@/contracts/DailyCheckInWithFees';
 
 export async function generateMetadata({
     searchParams,
@@ -8,21 +11,45 @@ export async function generateMetadata({
 }): Promise<Metadata> {
     const params = await searchParams;
     const address = params.address as string;
-    const username = params.username as string;
-    const streak = params.streak as string;
-    const rewards = params.rewards as string;
-    const pfp = params.pfp as string;
 
     const appUrl = 'https://proof-of-day.vercel.app';
+    let streak = '0';
+    let rewards = '0';
+    let username = params.username as string || 'Anonymous';
+    let pfp = params.pfp as string;
 
-    // If we have stats, use the dynamic OG image
+    // Fetch live data from blockchain if address is present
+    if (address && address.startsWith('0x')) {
+        try {
+            const publicClient = createPublicClient({
+                chain: base,
+                transport: http()
+            });
+
+            const userData = await publicClient.readContract({
+                address: DAILY_CHECKIN_WITH_FEES_ADDRESS as `0x${string}`,
+                abi: DAILY_CHECKIN_WITH_FEES_ABI,
+                functionName: 'users',
+                args: [address as `0x${string}`],
+            }) as [bigint, bigint, bigint];
+
+            if (userData) {
+                streak = userData[1].toString();
+                rewards = parseFloat(formatEther(userData[2])).toFixed(5);
+            }
+        } catch (e) {
+            console.error('Error fetching onchain stats for metadata:', e);
+        }
+    }
+
+    // Dynamic OG Image URL - now much shorter!
     const ogImageUrl = address
-        ? `${appUrl}/api/og?address=${address}&username=${encodeURIComponent(username || 'Anonymous')}&streak=${streak || '0'}&rewards=${rewards || '0'}${pfp ? `&pfp=${encodeURIComponent(pfp)}` : ''}`
+        ? `${appUrl}/api/og?streak=${streak}&rewards=${rewards}&username=${encodeURIComponent(username)}${pfp ? `&pfp=${encodeURIComponent(pfp)}` : ''}`
         : `${appUrl}/og.png`;
 
     return {
-        title: username ? `Proof Of Day - ${username}'s Streak` : 'Proof Of Day',
-        description: streak ? `I'm on a ${streak} day streak! Build your daily streak on Base and earn rewards.` : 'Show up every day on Base. Build your streak, earn rewards, prove your commitment onchain.',
+        title: 'Proof Of Day',
+        description: 'Build your daily streak on Base and earn rewards.',
         openGraph: {
             images: [{ url: ogImageUrl }],
         },
@@ -44,7 +71,7 @@ export async function generateMetadata({
             'fc:frame:image': ogImageUrl,
             'fc:frame:image:aspect_ratio': '1.91:1',
             'fc:frame:button:1': 'Open App',
-            'fc:frame:button:1:action': 'post', // Changed to post to avoid direct browser jump
+            'fc:frame:button:1:action': 'post',
         },
     };
 }
