@@ -42,6 +42,9 @@ export async function generateMetadata({
                 },
             }),
             'fc:frame:image': ogImageUrl,
+            'fc:frame:button:1': 'Check In',
+            'fc:frame:button:1:action': 'link',
+            'fc:frame:button:1:target': appUrl,
         },
     };
 }
