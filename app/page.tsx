@@ -31,7 +31,7 @@ export async function generateMetadata({
                 version: "next",
                 imageUrl: ogImageUrl,
                 button: {
-                    title: "Check In",
+                    title: "Open App",
                     action: {
                         type: "launch_app",
                         name: "Proof Of Day",
@@ -42,9 +42,9 @@ export async function generateMetadata({
                 },
             }),
             'fc:frame:image': ogImageUrl,
-            'fc:frame:button:1': 'Check In',
-            'fc:frame:button:1:action': 'link',
-            'fc:frame:button:1:target': appUrl,
+            'fc:frame:image:aspect_ratio': '1.91:1',
+            'fc:frame:button:1': 'Open App',
+            'fc:frame:button:1:action': 'post', // Changed to post to avoid direct browser jump
         },
     };
 }

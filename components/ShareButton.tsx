@@ -12,7 +12,10 @@ export default function ShareButton() {
     const handleShare = () => {
         const shareText = `Proving my commitment daily on @base! 🔵 🔥\n\nJoin my streak on Proof Of Day:`;
 
-        const shareUrl = `https://proof-of-day.vercel.app/?address=${address}&streak=${streak}&rewards=${pendingRewardsFormatted}${username ? `&username=${encodeURIComponent(username)}` : ''}${pfp ? `&pfp=${encodeURIComponent(pfp)}` : ''}${score ? `&score=${score}` : ''}`;
+        // Limit PFP length to avoid overly long URLs that can break Frame scraping
+        const sanitizedPfp = pfp && pfp.length < 500 ? pfp : '';
+        const shareUrl = `https://proof-of-day.vercel.app/?address=${address}&streak=${streak}&rewards=${pendingRewardsFormatted}${username ? `&username=${encodeURIComponent(username)}` : ''}${sanitizedPfp ? `&pfp=${encodeURIComponent(sanitizedPfp)}` : ''}${score ? `&score=${score}` : ''}`;
+
         const warpcastUrl = `https://warpcast.com/~/compose?text=${encodeURIComponent(shareText)}&embeds[]=${encodeURIComponent(shareUrl)}`;
         window.open(warpcastUrl, '_blank');
     };

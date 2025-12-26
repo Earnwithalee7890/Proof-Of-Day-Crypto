@@ -32,24 +32,6 @@ export const metadata: Metadata = {
     },
     other: {
         'base:app_id': '694c5189c63ad876c9081210',
-        'fc:frame': JSON.stringify({
-            version: "next",
-            imageUrl: `${appUrl}/og.png`,
-            button: {
-                title: "Check In",
-                action: {
-                    type: "launch_app",
-                    name: "Proof Of Day",
-                    url: appUrl,
-                    splashImageUrl: `${appUrl}/splash.png`,
-                    splashBackgroundColor: "#0052FF",
-                },
-            },
-        }),
-        'fc:frame:image': `${appUrl}/og.png`,
-        'fc:frame:button:1': 'Check In',
-        'fc:frame:button:1:action': 'link',
-        'fc:frame:button:1:target': appUrl,
         'fc:miniapp': 'true',
         'fc:miniapp:name': 'Proof Of Day',
         'fc:miniapp:url': appUrl,
