@@ -3,6 +3,7 @@ import HomeClient from './HomeClient';
 import { createPublicClient, http, formatEther } from 'viem';
 import { base } from 'viem/chains';
 import { DAILY_CHECKIN_WITH_FEES_ADDRESS, DAILY_CHECKIN_WITH_FEES_ABI } from '@/contracts/DailyCheckInWithFees';
+import { getFarcasterUserByAddress } from '@/lib/neynar';
 
 export async function generateMetadata({
     searchParams,
@@ -15,12 +16,14 @@ export async function generateMetadata({
     const appUrl = 'https://proof-of-day.vercel.app';
     let streak = '0';
     let rewards = '0';
-    let username = params.username as string || 'Anonymous';
-    let pfp = params.pfp as string;
+    let username = params.username as string || '';
+    let pfp = params.pfp as string || '';
+    let score = params.score as string || '';
 
-    // Fetch live data from blockchain if address is present
+    // If we have an address, fetch live on-chain stats AND Farcaster profile
     if (address && address.startsWith('0x')) {
         try {
+            // 1. Fetch On-chain Stats
             const publicClient = createPublicClient({
                 chain: base,
                 transport: http()
@@ -37,13 +40,27 @@ export async function generateMetadata({
                 streak = userData[1].toString();
                 rewards = parseFloat(formatEther(userData[2])).toFixed(5);
             }
+
+            // 2. Fetch Farcaster Profile automatically if not provided in URL
+            if (!username || !pfp) {
+                const fcUser = await getFarcasterUserByAddress(address);
+                if (fcUser) {
+                    username = username || fcUser.username || fcUser.display_name;
+                    pfp = pfp || fcUser.pfp_url;
+                    score = score || (fcUser.profile?.reputation_score || fcUser.reputation_score)?.toString() || '';
+                }
+            }
         } catch (e) {
-            console.error('Error fetching onchain stats for metadata:', e);
+            console.error('Error fetching data for metadata:', e);
         }
     }
-    // Dynamic OG Image URL - Shortened to prevent Frame scraping issues
+
+    // Fallback for username
+    const finalUsername = username || 'Friend';
+
+    // Dynamic OG Image URL - now fully server-side prepared
     const ogImageUrl = address
-        ? `${appUrl}/api/og?streak=${streak}&rewards=${rewards}&username=${encodeURIComponent(username)}${pfp ? `&pfp=${encodeURIComponent(pfp)}` : ''}`
+        ? `${appUrl}/api/og?streak=${streak}&rewards=${rewards}&username=${encodeURIComponent(finalUsername)}${pfp ? `&pfp=${encodeURIComponent(pfp)}` : ''}${score ? `&score=${score}` : ''}`
         : `${appUrl}/og.png`;
 
     // Final JSON for the Embed Meta Tags - Using launch_frame (legacy but more compatible)
@@ -63,8 +80,8 @@ export async function generateMetadata({
     });
 
     return {
-        title: 'Proof Of Day',
-        description: 'Build your daily streak on Base and earn rewards.',
+        title: finalUsername !== 'Friend' ? `Proof Of Day - ${finalUsername}'s Streak` : 'Proof Of Day',
+        description: `View ${finalUsername}'s daily streak and rewards on Base.`,
         openGraph: {
             images: [{ url: ogImageUrl }],
         },
