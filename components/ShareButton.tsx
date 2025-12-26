@@ -12,8 +12,8 @@ export default function ShareButton() {
     const handleShare = () => {
         const shareText = `Proving my commitment daily on @base! 🔵 🔥\n\nJoin my streak on Proof Of Day:`;
 
-        // Short URL to prevent Frame scraping issues. Stats are fetched on-server via address.
-        const shareUrl = `https://proof-of-day.vercel.app/?address=${address}${username ? `&username=${encodeURIComponent(username)}` : ''}${pfp && pfp.length < 300 ? `&pfp=${encodeURIComponent(pfp)}` : ''}`;
+        // Short URL to prevent Frame scraping issues. Address is the primary key.
+        const shareUrl = `https://proof-of-day.vercel.app/?address=${address}${username ? `&username=${encodeURIComponent(username)}` : ''}${pfp && pfp.length < 500 ? `&pfp=${encodeURIComponent(pfp)}` : ''}`;
 
         const warpcastUrl = `https://warpcast.com/~/compose?text=${encodeURIComponent(shareText)}&embeds[]=${encodeURIComponent(shareUrl)}`;
         window.open(warpcastUrl, '_blank');

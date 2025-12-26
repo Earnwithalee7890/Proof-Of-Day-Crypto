@@ -2,6 +2,12 @@ import { NeynarAPIClient } from '@neynar/nodejs-sdk';
 
 const apiKey = process.env.NEYNAR_API_KEY || process.env.NEXT_PUBLIC_NEYNAR_API_KEY || '';
 
+if (!apiKey) {
+    console.warn('⚠️ NEYNAR_API_KEY is missing from environment variables');
+} else {
+    console.log('✅ NEYNAR_API_KEY is configured');
+}
+
 export const neynarClient = apiKey ? new NeynarAPIClient({ apiKey }) : null;
 
 // Helper function to get Farcaster user by wallet address

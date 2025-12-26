@@ -22,6 +22,7 @@ export async function generateMetadata({
 
     // If we have an address, fetch live on-chain stats AND Farcaster profile
     if (address && address.startsWith('0x')) {
+        console.log(`🔍 Generating metadata for address: ${address}`);
         try {
             // 1. Fetch On-chain Stats
             const publicClient = createPublicClient({
@@ -39,21 +40,27 @@ export async function generateMetadata({
             if (userData) {
                 streak = userData[1].toString();
                 rewards = parseFloat(formatEther(userData[2])).toFixed(5);
+                console.log(`✅ Fetched on-chain stats: Streak ${streak}, Rewards ${rewards}`);
             }
 
             // 2. Fetch Farcaster Profile automatically if not provided in URL
             if (!username || !pfp) {
+                console.log('📡 Fetching Farcaster profile from Neynar...');
                 const fcUser = await getFarcasterUserByAddress(address);
                 if (fcUser) {
                     username = username || fcUser.username || fcUser.display_name || '';
                     pfp = pfp || fcUser.pfp_url || '';
+                    console.log(`✅ Found Farcaster user: ${username}`);
+
                     // Use any for score to avoid SDK type mismatch during build
                     const anyUser = fcUser as any;
                     score = score || (anyUser.profile?.reputation_score || anyUser.reputation_score)?.toString() || '';
+                } else {
+                    console.warn(`⚠️ No Farcaster user found for address ${address}`);
                 }
             }
         } catch (e) {
-            console.error('Error fetching data for metadata:', e);
+            console.error('❌ Error fetching data for metadata:', e);
         }
     }
 
