@@ -42,10 +42,21 @@ export async function generateMetadata({
         }
     }
 
-    // Dynamic OG Image URL - now much shorter!
-    const ogImageUrl = address
-        ? `${appUrl}/api/og?streak=${streak}&rewards=${rewards}&username=${encodeURIComponent(username)}${pfp ? `&pfp=${encodeURIComponent(pfp)}` : ''}`
-        : `${appUrl}/og.png`;
+    // Final JSON for the Embed Meta Tags
+    const miniappEmbed = JSON.stringify({
+        version: "1",
+        imageUrl: ogImageUrl,
+        button: {
+            title: "Open App",
+            action: {
+                type: "launch_miniapp",
+                name: "Proof Of Day",
+                url: appUrl,
+                splashImageUrl: `${appUrl}/splash.png`,
+                splashBackgroundColor: "#0052FF",
+            },
+        },
+    });
 
     return {
         title: 'Proof Of Day',
@@ -54,23 +65,11 @@ export async function generateMetadata({
             images: [{ url: ogImageUrl }],
         },
         other: {
-            'fc:frame': JSON.stringify({
-                version: "next",
-                imageUrl: ogImageUrl,
-                button: {
-                    title: "Open App",
-                    action: {
-                        type: "launch_app",
-                        name: "Proof Of Day",
-                        url: appUrl,
-                        splashImageUrl: `${appUrl}/splash.png`,
-                        splashBackgroundColor: "#0052FF",
-                    },
-                },
-            }),
+            'fc:miniapp': miniappEmbed,
+            'fc:frame': miniappEmbed,
             'fc:frame:image': ogImageUrl,
             'fc:frame:image:aspect_ratio': '1.91:1',
-            'fc:frame:button:1': 'Open App',
+            'fc:frame:button:1': "Open App",
             'fc:frame:button:1:action': 'post',
         },
     };
