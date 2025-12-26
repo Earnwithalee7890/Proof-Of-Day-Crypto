@@ -47,7 +47,9 @@ export async function generateMetadata({
                 if (fcUser) {
                     username = username || fcUser.username || fcUser.display_name || '';
                     pfp = pfp || fcUser.pfp_url || '';
-                    score = score || (fcUser.profile?.reputation_score || fcUser.reputation_score)?.toString() || '';
+                    // Use any for score to avoid SDK type mismatch during build
+                    const anyUser = fcUser as any;
+                    score = score || (anyUser.profile?.reputation_score || anyUser.reputation_score)?.toString() || '';
                 }
             }
         } catch (e) {
