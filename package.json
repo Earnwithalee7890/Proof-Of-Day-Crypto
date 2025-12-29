@@ -2,6 +2,15 @@
   "name": "proof-of-day",
   "version": "0.1.0",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Earnwithalee7890/Proof-Of-Day-Crypto.git"
+  },
+  "homepage": "https://proof-of-day.vercel.app",
+  "author": {
+    "name": "Proof Of Day",
+    "email": "earnwithalee@gmail.com"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",

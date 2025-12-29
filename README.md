@@ -11,7 +11,7 @@
 
 *Show up. Build streaks. Earn onchain.*
 
-[Live Demo](#) • [Documentation](#) • [Smart Contract](https://basescan.org/address/0x44b80503aec711f5f36958604d79547adc7d07e)
+[Live Demo](https://proof-of-day.vercel.app) • [Documentation](#) • [Smart Contract](https://basescan.org/address/0x60947AD600c925d7BDC7e29727D769EF3aa29f57)
 
 </div>
 
@@ -134,7 +134,9 @@ NEXT_PUBLIC_NEYNAR_API_KEY=your_neynar_key
 
 ## 📝 Smart Contract
 
-**Deployed on Base Mainnet**: [`0x44b80503aec711f5f36958604d79547adc7d07e`](https://basescan.org/address/0x44b80503aec711f5f36958604d79547adc7d07e)
+**Active Contract (With Rewards)**: [`0x60947AD600c925d7BDC7e29727D769EF3aa29f57`](https://basescan.org/address/0x60947AD600c925d7BDC7e29727D769EF3aa29f57)
+
+**Legacy Contract**: [`0x44B80503Aec711F5F36958604D79547ADC7D07ef`](https://basescan.org/address/0x44B80503Aec711F5F36958604D79547ADC7D07ef) *(Not in use)*
 
 ### Core Functions
 
@@ -273,8 +275,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🔗 Links
 
-- **Website**: [Coming Soon](#)
-- **Smart Contract**: [View on BaseScan](https://basescan.org/address/0x44b80503aec711f5f36958604d79547adc7d07e)
+- **Website**: [https://proof-of-day.vercel.app](https://proof-of-day.vercel.app)
+- **Smart Contract**: [View on BaseScan](https://basescan.org/address/0x60947AD600c925d7BDC7e29727D769EF3aa29f57)
 - **Farcaster**: [Follow us on Warpcast](#)
 - **Documentation**: [Read the Docs](#)
 
