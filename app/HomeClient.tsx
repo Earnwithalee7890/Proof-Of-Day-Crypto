@@ -11,6 +11,7 @@ import StreakVisual from '@/components/StreakVisual';
 import ShareButton from '@/components/ShareButton';
 import UserProfile from '@/components/UserProfile';
 import AnimatedBackground from '@/components/AnimatedBackground';
+import AchievementBadges from '@/components/AchievementBadges';
 import { DAILY_CHECKIN_WITH_FEES_ADDRESS } from '@/contracts/DailyCheckInWithFees';
 
 export default function HomeClient() {
@@ -98,6 +99,11 @@ export default function HomeClient() {
                         {/* Stats Cards */}
                         <div className="animate-in" style={{ animationDelay: '300ms' }}>
                             <StatsCard />
+                        </div>
+
+                        {/* Achievement Badges */}
+                        <div className="animate-in" style={{ animationDelay: '350ms' }}>
+                            <AchievementBadges />
                         </div>
 
                         {/* Check-In Section */}

@@ -1,15 +1,18 @@
 'use client';
 
 import { useBoostCheckIn } from '@/hooks/useBoostCheckIn';
-import { useUserStats } from '@/hooks/useUserStats'; // We'll keep sharing stats logic for now
+import { useUserStats } from '@/hooks/useUserStats';
 import { formatCountdown } from '@/utils/time';
 import { useEffect, useState } from 'react';
 import Confetti from './Confetti';
+import Toast from './Toast';
+import { useToast } from '@/hooks/useToast';
 
 export default function BoostCheckInButton() {
     const { boostCheckIn, isPending, isConfirming, isSuccess, error } = useBoostCheckIn();
     const { canCheckIn, timeUntilNextCheckIn, refetch } = useUserStats();
     const [countdown, setCountdown] = useState(timeUntilNextCheckIn);
+    const { toast, hideToast, success, error: showError } = useToast();
     const [showConfetti, setShowConfetti] = useState(false);
 
     useEffect(() => {
@@ -28,11 +31,18 @@ export default function BoostCheckInButton() {
     useEffect(() => {
         if (isSuccess) {
             setShowConfetti(true);
+            success('🚀 Boost Check-In Successful! Your streak is growing!');
             setTimeout(() => {
                 refetch();
             }, 2000);
         }
-    }, [isSuccess, refetch]);
+    }, [isSuccess, refetch, success]);
+
+    useEffect(() => {
+        if (error) {
+            showError((error as Error).message || 'Check-in failed. Please try again.');
+        }
+    }, [error, showError]);
 
     const handleBoost = () => {
         if (!isPending && !isConfirming) {
@@ -42,19 +52,21 @@ export default function BoostCheckInButton() {
 
     return (
         <div className="relative">
+            <Toast {...toast} onClose={hideToast} />
             <Confetti show={showConfetti} onComplete={() => setShowConfetti(false)} />
 
             <button
                 onClick={handleBoost}
                 disabled={isPending || isConfirming}
                 className={`
-          w-full text-xl py-6 rounded-2xl relative group overflow-hidden border-2
+          w-full text-xl py-8 md:py-6 rounded-2xl relative group overflow-hidden border-2
+          min-h-[60px] touch-manipulation active:scale-95
           ${isPending || isConfirming
                         ? 'border-white/10 opacity-50 cursor-not-allowed'
-                        : 'border-yellow-500/50 hover:border-yellow-400 bg-black/40 shadow-lg shadow-yellow-500/10'
+                        : 'border-yellow-500/50 hover:border-yellow-400 active:border-yellow-300 bg-black/40 shadow-lg shadow-yellow-500/10 hover:shadow-yellow-500/30'
                     }
-          transition-all duration-500
-        `}
+          transition-all duration-300
+         `}
             >
                 {/* Animated background gradient - Premium Gold */}
                 <div className="absolute inset-0 bg-gradient-to-r from-yellow-600/20 via-orange-600/20 to-yellow-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
