@@ -16,6 +16,9 @@ import GlobalStats from '@/components/GlobalStats';
 import Leaderboard from '@/components/Leaderboard';
 import CheckInCalendar from '@/components/CheckInCalendar';
 import ShareTemplates from '@/components/ShareTemplates';
+import GasTracker from '@/components/GasTracker';
+import RewardCalculator from '@/components/RewardCalculator';
+import ExportData from '@/components/ExportData';
 import { DAILY_CHECKIN_WITH_FEES_ADDRESS } from '@/contracts/DailyCheckInWithFees';
 
 export default function HomeClient() {
@@ -175,6 +178,21 @@ export default function HomeClient() {
                         {/* Check-In Calendar */}
                         <div className="animate-in" style={{ animationDelay: '650ms' }}>
                             <CheckInCalendar />
+                        </div>
+
+                        {/* Gas & Rewards Grid */}
+                        <div className="grid md:grid-cols-2 gap-6">
+                            <div className="animate-in" style={{ animationDelay: '675ms' }}>
+                                <GasTracker />
+                            </div>
+                            <div className="animate-in" style={{ animationDelay: '675ms' }}>
+                                <RewardCalculator />
+                            </div>
+                        </div>
+
+                        {/* Export Data */}
+                        <div className="animate-in" style={{ animationDelay: '690ms' }}>
+                            <ExportData />
                         </div>
 
                         {/* Share Templates */}
