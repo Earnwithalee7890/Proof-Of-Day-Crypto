@@ -1,16 +1,15 @@
 'use client';
 
-import { useReadContract, useGasPrice } from 'wagmi';
+import { useReadContract, useGasPrice, useBalance } from 'wagmi';
 import { DAILY_CHECKIN_WITH_FEES_ADDRESS, DAILY_CHECKIN_WITH_FEES_ABI } from '@/contracts/DailyCheckInWithFees';
 import { formatEther, formatGwei } from 'viem';
 import AnimatedCounter from './AnimatedCounter';
 
 export default function GlobalStats() {
     // Real-time data fetching
-    const { data: balanceData } = useReadContract({
+    const { data: balanceData } = useBalance({
         address: DAILY_CHECKIN_WITH_FEES_ADDRESS,
-        abi: DAILY_CHECKIN_WITH_FEES_ABI,
-        functionName: 'getBalance',
+        chainId: 8453,
         query: { refetchInterval: 10000 }
     });
 
@@ -26,7 +25,7 @@ export default function GlobalStats() {
         {
             icon: '💎',
             label: 'Reward Pool',
-            value: balanceData ? parseFloat(formatEther(balanceData)) : 0,
+            value: balanceData ? parseFloat(formatEther(balanceData.value)) : 0,
             suffix: ' ETH',
             color: 'text-blue-400',
             bgGradient: 'from-blue-500/10 to-blue-600/10',
