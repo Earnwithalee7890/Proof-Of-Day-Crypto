@@ -13,6 +13,9 @@ import UserProfile from '@/components/UserProfile';
 import AnimatedBackground from '@/components/AnimatedBackground';
 import AchievementBadges from '@/components/AchievementBadges';
 import GlobalStats from '@/components/GlobalStats';
+import Leaderboard from '@/components/Leaderboard';
+import CheckInCalendar from '@/components/CheckInCalendar';
+import ShareTemplates from '@/components/ShareTemplates';
 import { DAILY_CHECKIN_WITH_FEES_ADDRESS } from '@/contracts/DailyCheckInWithFees';
 
 export default function HomeClient() {
@@ -102,6 +105,11 @@ export default function HomeClient() {
                             <GlobalStats />
                         </div>
 
+                        {/* Leaderboard */}
+                        <div className="animate-in" style={{ animationDelay: '275ms' }}>
+                            <Leaderboard />
+                        </div>
+
                         {/* Stats Cards */}
                         <div className="animate-in" style={{ animationDelay: '300ms' }}>
                             <StatsCard />
@@ -162,6 +170,16 @@ export default function HomeClient() {
                                 </p>
                             </div>
                             <ShareButton />
+                        </div>
+
+                        {/* Check-In Calendar */}
+                        <div className="animate-in" style={{ animationDelay: '650ms' }}>
+                            <CheckInCalendar />
+                        </div>
+
+                        {/* Share Templates */}
+                        <div className="animate-in" style={{ animationDelay: '700ms' }}>
+                            <ShareTemplates />
                         </div>
 
                         {/* Info Cards */}
