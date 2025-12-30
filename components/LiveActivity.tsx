@@ -58,7 +58,7 @@ export default function LiveActivity() {
                         {events.map((event, index) => (
                             <div
                                 key={`${event.hash}-${index}`}
-                                className="flex items-center justify-between p-4 rounded-xl bg-white/5 border border-white/10 animate-in fade-in slide-in-from-top-2"
+                                className="relative flex items-center justify-between p-4 rounded-xl bg-white/5 border border-white/10 animate-in fade-in slide-in-from-top-2"
                             >
                                 <div className="flex items-center gap-3">
                                     <div className="w-10 h-10 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold">
@@ -73,7 +73,7 @@ export default function LiveActivity() {
                                         </p>
                                     </div>
                                 </div>
-                                <div className="text-right text-xs text-gray-400">
+                                <div className="text-right text-xs text-gray-400 pr-12">
                                     <a
                                         href={`https://basescan.org/tx/${event.hash}`}
                                         target="_blank"
@@ -82,6 +82,9 @@ export default function LiveActivity() {
                                     >
                                         View Tx ↗
                                     </a>
+                                </div>
+                                <div className="absolute top-2 right-2 text-[10px] text-gray-500 font-mono">
+                                    {distanceToNow(event.timestamp)}
                                 </div>
                             </div>
                         ))}

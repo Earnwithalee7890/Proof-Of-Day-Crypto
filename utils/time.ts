@@ -34,3 +34,8 @@ export function formatTimestamp(timestamp: number): string {
         return 'Just now';
     }
 }
+
+export function distanceToNow(timestamp: number | bigint): string {
+    const ts = typeof timestamp === 'bigint' ? Number(timestamp) : timestamp;
+    return formatTimestamp(ts);
+}
