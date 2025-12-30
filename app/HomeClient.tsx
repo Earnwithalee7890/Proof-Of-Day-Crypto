@@ -98,33 +98,8 @@ export default function HomeClient() {
             {isConnected ? (
                 <section className="container mx-auto px-4 pb-20">
                     <div className="max-w-6xl mx-auto space-y-8">
-                        {/* Streak Visual */}
-                        <div className="animate-in" style={{ animationDelay: '200ms' }}>
-                            <StreakVisual />
-                        </div>
-
-                        {/* Global Stats */}
-                        <div className="animate-in" style={{ animationDelay: '250ms' }}>
-                            <GlobalStats />
-                        </div>
-
-                        {/* Leaderboard */}
-                        <div className="animate-in" style={{ animationDelay: '275ms' }}>
-                            <Leaderboard />
-                        </div>
-
-                        {/* Stats Cards */}
-                        <div className="animate-in" style={{ animationDelay: '300ms' }}>
-                            <StatsCard />
-                        </div>
-
-                        {/* Achievement Badges */}
-                        <div className="animate-in" style={{ animationDelay: '350ms' }}>
-                            <AchievementBadges />
-                        </div>
-
-                        {/* Check-In Section */}
-                        <div className="glass rounded-2xl p-8 space-y-6 animate-in" style={{ animationDelay: '400ms' }}>
+                        {/* Check-In Section - FIRST */}
+                        <div className="glass rounded-2xl p-8 space-y-6 animate-in" style={{ animationDelay: '200ms' }}>
                             <div className="text-center space-y-2">
                                 <h3 className="text-2xl font-bold">Daily Check-In</h3>
                                 <p className="text-gray-400">
@@ -153,8 +128,33 @@ export default function HomeClient() {
                             </div>
                         </div>
 
+                        {/* Streak Visual */}
+                        <div className="animate-in" style={{ animationDelay: '250ms' }}>
+                            <StreakVisual />
+                        </div>
+
+                        {/* Global Stats */}
+                        <div className="animate-in" style={{ animationDelay: '300ms' }}>
+                            <GlobalStats />
+                        </div>
+
+                        {/* Leaderboard */}
+                        <div className="animate-in" style={{ animationDelay: '325ms' }}>
+                            <Leaderboard />
+                        </div>
+
+                        {/* Stats Cards */}
+                        <div className="animate-in" style={{ animationDelay: '350ms' }}>
+                            <StatsCard />
+                        </div>
+
+                        {/* Achievement Badges */}
+                        <div className="animate-in" style={{ animationDelay: '375ms' }}>
+                            <AchievementBadges />
+                        </div>
+
                         {/* Claim Rewards Section */}
-                        <div className="glass rounded-2xl p-8 space-y-6 animate-in" style={{ animationDelay: '500ms' }}>
+                        <div className="glass rounded-2xl p-8 space-y-6 animate-in" style={{ animationDelay: '400ms' }}>
                             <div className="text-center space-y-2">
                                 <h3 className="text-2xl font-bold">Claim Rewards</h3>
                                 <p className="text-gray-400">

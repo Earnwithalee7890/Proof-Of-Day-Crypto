@@ -5,6 +5,11 @@ import { base } from 'viem/chains';
 import { DAILY_CHECKIN_WITH_FEES_ADDRESS, DAILY_CHECKIN_WITH_FEES_ABI } from '@/contracts/DailyCheckInWithFees';
 import { getFarcasterUserByAddress } from '@/lib/neynar';
 
+// Force dynamic rendering to prevent localStorage errors during build
+export const dynamic = 'force-dynamic';
+export const dynamicParams = true;
+export const revalidate = 0;
+
 export async function generateMetadata({
     searchParams,
 }: {
