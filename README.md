@@ -9,9 +9,14 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
 [![Wagmi](https://img.shields.io/badge/Wagmi-2.14-black?style=for-the-badge)](https://wagmi.sh)
 
+[![Built on Base](https://img.shields.io/badge/Built%20on-Base-0052FF?style=for-the-badge)](https://base.org)
+[![Base Builder](https://img.shields.io/badge/Base-Builder-blue?style=for-the-badge)](https://base.org/builder)
+[![Talent Protocol](https://img.shields.io/badge/Talent-Protocol-purple?style=for-the-badge)](https://beta.talentprotocol.com)
+[![Farcaster](https://img.shields.io/badge/Farcaster-Mini%20App-8A63D2?style=for-the-badge)](https://farcaster.xyz)
+
 *Show up. Build streaks. Earn onchain.*
 
-[Live Demo](https://proof-of-day.vercel.app) • [Documentation](#) • [Smart Contract](https://basescan.org/address/0x60947AD600c925d7BDC7e29727D769EF3aa29f57)
+[🚀 Live App](https://proof-of-day.vercel.app) • [📱 Base App](https://base.app/app/proof-of-day.vercel.app) • [📝 Contract](https://basescan.org/address/0x60947AD600c925d7BDC7e29727D769EF3aa29f57) • [👨‍💻 Developer](https://github.com/Earnwithalee7890)
 
 </div>
 
@@ -132,11 +137,33 @@ NEXT_PUBLIC_NEYNAR_API_KEY=your_neynar_key
 
 ---
 
-## 📝 Smart Contract
+## 📝 Smart Contracts
 
-**Active Contract (With Rewards)**: [`0x60947AD600c925d7BDC7e29727D769EF3aa29f57`](https://basescan.org/address/0x60947AD600c925d7BDC7e29727D769EF3aa29f57)
+### 🔵 Deployed on Base Mainnet
 
-**Legacy Contract**: [`0x44B80503Aec711F5F36958604D79547ADC7D07ef`](https://basescan.org/address/0x44B80503Aec711F5F36958604D79547ADC7D07ef) *(Not in use)*
+**Premium Check-In Contract (Active)**
+
+```
+Contract Address: 0x60947AD600c925d7BDC7e29727D769EF3aa29f57
+Network: Base Mainnet (Chain ID: 8453)
+Status: ✅ Active | 67+ Transactions
+Features: Daily check-ins with fees, Streak tracking, ETH rewards
+```
+
+- 🔗 [View on BaseScan](https://basescan.org/address/0x60947AD600c925d7BDC7e29727D769EF3aa29f57)
+- 📊 [Contract Interactions](https://basescan.org/address/0x60947AD600c925d7BDC7e29727D769EF3aa29f57#internaltx)
+- 📈 [Transaction History](https://basescan.org/address/0x60947AD600c925d7BDC7e29727D769EF3aa29f57#transactions)
+
+**Standard Check-In Contract**
+
+```
+Contract Address: 0x44B80503Aec711F5F36958604D79547ADC7D07ef
+Network: Base Mainnet (Chain ID: 8453)
+Status: 📦 Legacy
+Features: Free check-ins, Basic streak tracking
+```
+
+- 🔗 [View on BaseScan](https://basescan.org/address/0x44B80503Aec711F5F36958604D79547ADC7D07ef)
 
 ### Core Functions
 
@@ -304,6 +331,17 @@ Built with 💙 on **Base** using:
 - [RainbowKit](https://www.rainbowkit.com) - Wallet Connection
 - [Neynar](https://neynar.com) - Farcaster Infrastructure
 - [Base](https://base.org) - Ethereum L2
+
+### 👨‍💻 Developer
+
+**Proof Of Day** is built by [@Earnwithalee7890](https://github.com/Earnwithalee7890) for the Base Builder Campaign.
+
+- 🏗️ **Building on Base** since December 2024
+- 💻 **GitHub**: [Earnwithalee7890](https://github.com/Earnwithalee7890)
+- 📧 **Email**: earnwithalee@gmail.com
+- 🎯 **Base App**: [proof-of-day.vercel.app](https://base.app/app/proof-of-day.vercel.app)
+- 🔵 **Base Builder**: Participating in Top Base Builders Campaign
+- 📊 **Talent Protocol**: Active contributor to Web3 ecosystem
 
 ---
 

@@ -1,4 +1,22 @@
-// Contract deployed at: 0x44B80503Aec711F5F36958604D79547ADC7D07ef
+/**
+ * Daily Check-In Contract (Standard)
+ * 
+ * Deployed on Base Mainnet
+ * Contract Address: 0x44B80503Aec711F5F36958604D79547ADC7D07ef
+ * Network: Base (Chain ID: 8453)
+ * 
+ * Features:
+ * - Free daily check-in
+ * - Streak tracking
+ * - Reward accumulation
+ * - 24-hour check-in interval
+ * 
+ * Built for Base Builder Campaign
+ * Repository: https://github.com/Earnwithalee7890/Proof-Of-Day-Crypto
+ * 
+ * @author Proof Of Day (earnwithalee@gmail.com)
+ * @license MIT
+ */
 export const DAILY_CHECKIN_ADDRESS = '0x44B80503Aec711F5F36958604D79547ADC7D07ef' as const;
 
 export const DAILY_CHECKIN_ABI = [

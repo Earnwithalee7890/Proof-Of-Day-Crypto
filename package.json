@@ -11,6 +11,29 @@
     "name": "Proof Of Day",
     "email": "earnwithalee@gmail.com"
   },
+  "keywords": [
+    "base",
+    "base-mainnet",
+    "farcaster",
+    "onchain",
+    "web3",
+    "defi",
+    "rewards",
+    "ethereum",
+    "smart-contracts",
+    "daily-checkin",
+    "streak",
+    "proof-of-day",
+    "miniapp",
+    "base-builder"
+  ],
+  "funding": {
+    "type": "individual",
+    "url": "https://base.app/app/proof-of-day.vercel.app"
+  },
+  "bugs": {
+    "url": "https://github.com/Earnwithalee7890/Proof-Of-Day-Crypto/issues"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",

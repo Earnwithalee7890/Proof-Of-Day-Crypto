@@ -32,10 +32,18 @@ export const metadata: Metadata = {
     },
     other: {
         'base:app_id': '694c5189c63ad876c9081210',
+        'base:network': 'base-mainnet',
+        'base:contract': '0x60947AD600c925d7BDC7e29727D769EF3aa29f57',
+        'base:category': 'defi',
         'fc:miniapp': 'true',
         'fc:miniapp:name': 'Proof Of Day',
         'fc:miniapp:url': appUrl,
         'fc:miniapp:icon': `${appUrl}/icon.png`,
+        'og:type': 'website',
+        'twitter:card': 'summary_large_image',
+        'twitter:title': 'Proof Of Day',
+        'twitter:description': 'Show up every day on Base. Build your streak, earn rewards, prove your commitment onchain.',
+        'twitter:image': `${appUrl}/og.png`,
     },
 };
 
