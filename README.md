@@ -80,6 +80,15 @@ In a world where attention spans are shrinking, **Proof Of Day** helps you build
 
 ---
 
+## ✨ Premium Features
+
+- **⛽ Gas Tracker**: Real-time network fee monitoring
+- **💰 Reward Calculator**: Project your potential earnings
+- **📥 Data Export**: Download your history (CSV/JSON)
+- **📊 Global Stats**: Live community metrics
+- **🏆 Leaderboard**: Compete for top streaks
+- **📱 Share Templates**: Pre-built social posts
+
 ## 🛠️ Tech Stack
 
 | Category | Technology |

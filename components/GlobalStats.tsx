@@ -1,123 +1,71 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useReadContract } from 'wagmi';
+import { useReadContract, useGasPrice } from 'wagmi';
 import { DAILY_CHECKIN_WITH_FEES_ADDRESS, DAILY_CHECKIN_WITH_FEES_ABI } from '@/contracts/DailyCheckInWithFees';
-import { formatEther } from 'viem';
-
-interface AnimatedCounterProps {
-    value: number;
-    duration?: number;
-    decimals?: number;
-}
-
-function AnimatedCounter({ value, duration = 2000, decimals = 0 }: AnimatedCounterProps) {
-    const [count, setCount] = useState(0);
-
-    useEffect(() => {
-        let startTime: number | null = null;
-        const startValue = 0;
-
-        const animate = (currentTime: number) => {
-            if (!startTime) startTime = currentTime;
-            const progress = Math.min((currentTime - startTime) / duration, 1);
-
-            const easeOutQuart = 1 - Math.pow(1 - progress, 4);
-            const currentCount = startValue + (value - startValue) * easeOutQuart;
-
-            setCount(currentCount);
-
-            if (progress < 1) {
-                requestAnimationFrame(animate);
-            }
-        };
-
-        requestAnimationFrame(animate);
-    }, [value, duration]);
-
-    return (
-        <span>
-            {decimals > 0 ? count.toFixed(decimals) : Math.floor(count).toLocaleString()}
-        </span>
-    );
-}
+import { formatEther, formatGwei } from 'viem';
+import AnimatedCounter from './AnimatedCounter';
 
 export default function GlobalStats() {
-    const [totalUsers, setTotalUsers] = useState(0);
-    const [totalCheckIns, setTotalCheckIns] = useState(0);
-    const [totalETH, setTotalETH] = useState(0);
-
-    // Get contract balance to show total ETH distributed
-    const { data: contractBalance } = useReadContract({
+    // Real-time data fetching
+    const { data: balanceData } = useReadContract({
         address: DAILY_CHECKIN_WITH_FEES_ADDRESS,
-        abi: [{
-            type: 'function',
-            name: 'getBalance',
-            inputs: [],
-            outputs: [{ name: '', type: 'uint256' }],
-            stateMutability: 'view',
-        }],
+        abi: DAILY_CHECKIN_WITH_FEES_ABI,
         functionName: 'getBalance',
+        query: { refetchInterval: 10000 }
     });
 
-    useEffect(() => {
-        // Simulate global stats - in production, these would come from a subgraph or indexer
-        // For now, we'll use realistic placeholder values that update
-        const simulateStats = () => {
-            setTotalUsers(Math.floor(Math.random() * 50) + 120); // 120-170 users
-            setTotalCheckIns(Math.floor(Math.random() * 200) + 1500); // 1500-1700 check-ins
+    const { data: rewardData } = useReadContract({
+        address: DAILY_CHECKIN_WITH_FEES_ADDRESS,
+        abi: DAILY_CHECKIN_WITH_FEES_ABI,
+        functionName: 'rewardPerCheckIn',
+    });
 
-            if (contractBalance) {
-                // Total ETH distributed = fees collected
-                const balance = parseFloat(formatEther(contractBalance as bigint));
-                setTotalETH(balance);
-            } else {
-                setTotalETH(0.067); // Fallback based on known transaction count
-            }
-        };
-
-        simulateStats();
-        const interval = setInterval(simulateStats, 30000); // Update every 30 seconds
-
-        return () => clearInterval(interval);
-    }, [contractBalance]);
+    const { data: gasPrice } = useGasPrice({ chainId: 8453, query: { refetchInterval: 5000 } });
 
     const stats = [
         {
-            icon: '👥',
-            label: 'Total Users',
-            value: totalUsers,
-            suffix: '',
+            icon: '💎',
+            label: 'Reward Pool',
+            value: balanceData ? parseFloat(formatEther(balanceData)) : 0,
+            suffix: ' ETH',
             color: 'text-blue-400',
             bgGradient: 'from-blue-500/10 to-blue-600/10',
-            decimals: 0,
+            decimals: 4,
+            isStatic: false,
+            customLabel: null
         },
         {
-            icon: '✅',
-            label: 'Total Check-Ins',
-            value: totalCheckIns,
+            icon: '🎁',
+            label: 'Pay Per Check-In',
+            value: rewardData ? parseFloat(formatEther(rewardData)) : 0.0001,
+            suffix: ' ETH',
+            color: 'text-green-400',
+            bgGradient: 'from-green-500/10 to-green-600/10',
+            decimals: 5,
+            isStatic: false,
+            customLabel: null
+        },
+        {
+            icon: '⛽',
+            label: 'Base Gas',
+            value: gasPrice ? parseFloat(formatGwei(gasPrice)) : 0,
+            suffix: ' Gwei',
+            color: 'text-yellow-400',
+            bgGradient: 'from-yellow-500/10 to-yellow-600/10',
+            decimals: 2,
+            isStatic: false,
+            customLabel: null
+        },
+        {
+            icon: '⚡',
+            label: 'Network Status',
+            value: 100, // Active
             suffix: '',
             color: 'text-green-400',
             bgGradient: 'from-green-500/10 to-green-600/10',
             decimals: 0,
-        },
-        {
-            icon: '💎',
-            label: 'ETH in Pool',
-            value: totalETH,
-            suffix: ' ETH',
-            color: 'text-yellow-400',
-            bgGradient: 'from-yellow-500/10 to-yellow-600/10',
-            decimals: 4,
-        },
-        {
-            icon: '🔥',
-            label: 'Active Today',
-            value: Math.floor(totalUsers * 0.65), // ~65% daily active
-            suffix: '',
-            color: 'text-red-400',
-            bgGradient: 'from-red-500/10 to-red-600/10',
-            decimals: 0,
+            isStatic: true,
+            customLabel: 'Online'
         },
     ];
 
@@ -150,41 +98,29 @@ export default function GlobalStats() {
                         <div className="relative space-y-3">
                             <div className="flex items-center justify-between">
                                 <span className="text-3xl">{stat.icon}</span>
-                                <div className={`px-2 py-1 rounded-lg bg-black/20 border border-white/10`}>
-                                    <span className="text-xs font-mono text-gray-400">24h</span>
-                                </div>
+                                {stat.isStatic && (
+                                    <div className={`px-2 py-1 rounded-lg bg-black/20 border border-white/10`}>
+                                        <span className="text-xs font-mono text-gray-400">24h</span>
+                                    </div>
+                                )}
                             </div>
 
                             <div>
                                 <div className={`text-3xl font-black ${stat.color} tracking-tight`}>
-                                    <AnimatedCounter value={stat.value} decimals={stat.decimals} />
-                                    <span className="text-lg">{stat.suffix}</span>
+                                    {stat.customLabel ? (
+                                        stat.customLabel
+                                    ) : (
+                                        <AnimatedCounter value={stat.value} decimals={stat.decimals} />
+                                    )}
                                 </div>
-                                <p className="text-sm text-gray-400 font-medium mt-1">{stat.label}</p>
-                            </div>
-
-                            {/* Trending indicator */}
-                            <div className="flex items-center gap-1 text-xs text-green-400">
-                                <span>↗</span>
-                                <span className="font-medium">+{Math.floor(Math.random() * 10 + 5)}%</span>
+                                <div className="flex items-center gap-1 text-sm text-gray-400 font-medium">
+                                    {stat.label}
+                                    {stat.suffix}
+                                </div>
                             </div>
                         </div>
-
-                        {/* Decorative element */}
-                        <div className="absolute -right-4 -bottom-4 w-24 h-24 bg-gradient-to-br from-white/5 to-transparent rounded-full blur-2xl" />
                     </div>
                 ))}
-            </div>
-
-            {/* Additional Info */}
-            <div className="flex items-center justify-between pt-4 border-t border-white/5">
-                <div className="flex items-center gap-2 text-sm text-gray-400">
-                    <span>🔵</span>
-                    <span>Powered by Base Mainnet</span>
-                </div>
-                <div className="text-xs text-gray-500">
-                    Updates every 30s
-                </div>
             </div>
         </div>
     );

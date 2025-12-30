@@ -1,9 +1,9 @@
 'use client';
 
-import { useUserStats } from '@/hooks/useUserStats';
+import { useBoostUserStats } from '@/hooks/useBoostUserStats';
 
 export default function StreakVisual() {
-    const { streak } = useUserStats();
+    const { streak } = useBoostUserStats();
 
     const getMilestoneStatus = () => {
         if (streak >= 100) return { text: 'LEGENDARY', color: 'text-purple-400', icon: '👑' };

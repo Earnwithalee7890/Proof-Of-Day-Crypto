@@ -13,7 +13,7 @@ import UserProfile from '@/components/UserProfile';
 import AnimatedBackground from '@/components/AnimatedBackground';
 import AchievementBadges from '@/components/AchievementBadges';
 import GlobalStats from '@/components/GlobalStats';
-import Leaderboard from '@/components/Leaderboard';
+import LiveActivity from '@/components/LiveActivity';
 import CheckInCalendar from '@/components/CheckInCalendar';
 import ShareTemplates from '@/components/ShareTemplates';
 import GasTracker from '@/components/GasTracker';
@@ -138,9 +138,9 @@ export default function HomeClient() {
                             <GlobalStats />
                         </div>
 
-                        {/* Leaderboard */}
+                        {/* Live Activity */}
                         <div className="animate-in" style={{ animationDelay: '325ms' }}>
-                            <Leaderboard />
+                            <LiveActivity />
                         </div>
 
                         {/* Stats Cards */}

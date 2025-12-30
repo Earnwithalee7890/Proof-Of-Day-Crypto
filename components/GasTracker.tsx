@@ -84,9 +84,9 @@ export default function GasTracker() {
     };
 
     return (
-        <div className="glass rounded-2xl p-6 space-y-4">
+        <div className="glass rounded-2xl p-6 space-y-4 hover:bg-white/5 transition-colors duration-300">
             <div className="flex items-center justify-between">
-                <div>
+                <div className="flex items-center gap-2">
                     <h3 className="text-lg font-bold flex items-center gap-2">
                         ⛽ Base Gas Tracker
                     </h3>

@@ -1,63 +1,13 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useUserStats } from '@/hooks/useUserStats';
+import { useBoostUserStats } from '@/hooks/useBoostUserStats';
 import { useState } from 'react';
 
-interface Badge {
-    id: string;
-    name: string;
-    icon: string;
-    description: string;
-    requirement: number;
-    color: string;
-}
-
-const BADGES: Badge[] = [
-    {
-        id: 'starter',
-        name: 'First Steps',
-        icon: '🌱',
-        description: 'Complete your first check-in',
-        requirement: 1,
-        color: 'from-green-400 to-emerald-600',
-    },
-    {
-        id: 'warming',
-        name: 'Getting Warm',
-        icon: '💪',
-        description: 'Reach a 3-day streak',
-        requirement: 3,
-        color: 'from-blue-400 to-cyan-600',
-    },
-    {
-        id: 'hot',
-        name: 'Hot Streak',
-        icon: '⚡',
-        description: 'Maintain a 7-day streak',
-        requirement: 7,
-        color: 'from-yellow-400 to-orange-600',
-    },
-    {
-        id: 'fire',
-        name: 'On Fire',
-        icon: '🔥',
-        description: 'Achieve a 30-day streak',
-        requirement: 30,
-        color: 'from-orange-400 to-red-600',
-    },
-    {
-        id: 'legend',
-        name: 'Legendary',
-        icon: '👑',
-        description: 'Reach 100-day streak',
-        requirement: 100,
-        color: 'from-purple-400 to-pink-600',
-    },
-];
+// ... (keep usage of BADGES same)
 
 export default function AchievementBadges() {
-    const { streak } = useUserStats();
+    const { streak } = useBoostUserStats();
     const [selectedBadge, setSelectedBadge] = useState<Badge | null>(null);
 
     const isBadgeUnlocked = (requirement: number) => streak >= requirement;
