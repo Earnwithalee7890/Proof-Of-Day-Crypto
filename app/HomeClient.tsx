@@ -12,6 +12,7 @@ import ShareButton from '@/components/ShareButton';
 import UserProfile from '@/components/UserProfile';
 import AnimatedBackground from '@/components/AnimatedBackground';
 import AchievementBadges from '@/components/AchievementBadges';
+import GlobalStats from '@/components/GlobalStats';
 import { DAILY_CHECKIN_WITH_FEES_ADDRESS } from '@/contracts/DailyCheckInWithFees';
 
 export default function HomeClient() {
@@ -94,6 +95,11 @@ export default function HomeClient() {
                         {/* Streak Visual */}
                         <div className="animate-in" style={{ animationDelay: '200ms' }}>
                             <StreakVisual />
+                        </div>
+
+                        {/* Global Stats */}
+                        <div className="animate-in" style={{ animationDelay: '250ms' }}>
+                            <GlobalStats />
                         </div>
 
                         {/* Stats Cards */}
