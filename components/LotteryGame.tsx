@@ -125,7 +125,7 @@ export default function LotteryGame() {
                             <span className="block text-[10px] uppercase tracking-wider">Last Winner:</span>
                             <span className="font-mono text-yellow-500">
                                 {lastWinner.slice(0, 6)}...{lastWinner.slice(-4)}
-                                <span className="text-white ml-2">({formatEther(lastWinAmount || 0n)} ETH)</span>
+                                <span className="text-white ml-2">({formatEther(lastWinAmount || BigInt(0))} ETH)</span>
                             </span>
                         </div>
                     )}
