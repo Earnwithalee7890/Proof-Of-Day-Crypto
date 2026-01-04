@@ -19,6 +19,9 @@ import ShareTemplates from '@/components/ShareTemplates';
 import GasTracker from '@/components/GasTracker';
 import RewardCalculator from '@/components/RewardCalculator';
 import ExportData from '@/components/ExportData';
+import StakingDashboard from '@/components/StakingDashboard';
+import LotteryGame from '@/components/LotteryGame';
+import ReferralDashboard from '@/components/ReferralDashboard';
 import { DAILY_CHECKIN_WITH_FEES_ADDRESS } from '@/contracts/DailyCheckInWithFees';
 
 export default function HomeClient() {
@@ -141,6 +144,17 @@ export default function HomeClient() {
                         {/* Live Activity */}
                         <div className="animate-in" style={{ animationDelay: '325ms' }}>
                             <LiveActivity />
+                        </div>
+
+                        {/* Staking Vault - NEW */}
+                        <div className="animate-in" style={{ animationDelay: '340ms' }}>
+                            <StakingDashboard />
+                        </div>
+
+                        {/* Games & Social Grid */}
+                        <div className="grid md:grid-cols-2 gap-6 animate-in" style={{ animationDelay: '360ms' }}>
+                            <LotteryGame />
+                            <ReferralDashboard />
                         </div>
 
                         {/* Stats Cards */}
