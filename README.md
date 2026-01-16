@@ -293,7 +293,10 @@ proof-of-day/
 
 ## 🤝 Contributing
 
-We welcome contributions! Here's how you can help:
+We welcome contributions! Please read our [Contributing Guidelines](CONTRIBUTING.md) and [Code of Conduct](CODE_OF_CONDUCT.md) before starting.
+For security issues, please see our [Security Policy](SECURITY.md).
+
+Here's how you can help:
 
 1. **Fork the repository**
 2. **Create your feature branch** (`git checkout -b feature/AmazingFeature`)
