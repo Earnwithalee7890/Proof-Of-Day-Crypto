@@ -17,7 +17,7 @@ export const useInterval = (callback: () => void, delay: number | null) => {
 
 export const useTimeout = (callback: () => void, delay: number | null) => {
   const savedCallback = useRef(callback);
-  const timeoutRef = useRef<NodeJS.Timeout>();
+  const timeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
 
   useEffect(() => {
     savedCallback.current = callback;
