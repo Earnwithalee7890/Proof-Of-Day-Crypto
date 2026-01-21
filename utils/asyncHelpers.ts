@@ -11,11 +11,11 @@ export const timeout = <T>(promise: Promise<T>, ms: number): Promise<T> => {
 
 export const promiseAllSettled = async <T>(
   promises: Promise<T>[]
-): Promise<{ fulfilled: T[]; rejected: Error[] }> => {
+): Promise<{ fulfilled: Awaited<T>[]; rejected: Error[] }> => {
   const results = await Promise.allSettled(promises);
   return {
     fulfilled: results
-      .filter((r): r is PromiseFulfilledResult<T> => r.status === 'fulfilled')
+      .filter((r): r is PromiseFulfilledResult<Awaited<T>> => r.status === 'fulfilled')
       .map(r => r.value),
     rejected: results
       .filter((r): r is PromiseRejectedResult => r.status === 'rejected')
